@@ -1,4 +1,4 @@
--- Universal Hub V1.04
+-- Universal Hub V1.05
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
@@ -158,12 +158,12 @@ end)
 local OtherScriptsSection = Window:NewTab("Other Scripts")
 local OtherScripts = OtherScriptsSection:NewSection("Other Scripts")
 
-OtherScripts:NewButton("Dex", "Dex explorer V5", function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
-end)
-
 OtherScripts:NewButton("Infinite Yield", "Tons of fun commands", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
+
+OtherScripts:NewButton("CMD-X", "Like infinite Yield but smoother and more commands", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source", true))()
 end)
 
 -- UI
@@ -179,3 +179,10 @@ for theme, color in pairs(colors) do
 		Library:ChangeColor(theme, color3)
 	end)
 end
+
+local Credits = Window:NewTab("Credits")
+local CreditSection = Credits:NewSection("Credits")
+
+CreditSection:NewLabel("Scripting: !Bop#8928")
+CreditSection:NewLabel("Testing: !Bop#8928")
+CreditSection:NewLabel("Skidding: !Bop#8928")
