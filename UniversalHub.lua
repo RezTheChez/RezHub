@@ -1,7 +1,7 @@
---Universal Hub V1.00
+-- Universal Hub V1.02
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -15,10 +15,11 @@ local LocalPlayer = Window:NewTab("LocalPlayer")
 local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
 local player = game:GetService'Players'.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local UIS = game:GetService'UserInputService';
+local UIS = game:GetService'UserInputService'
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
+local chatInerval = 1
 
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -89,12 +90,22 @@ local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
 
 
-MiscSection:NewToggle("Chat Spam", "Spams chat with a message", function(state)
+MiscSection:NewButton("Chat Spam", "Spams chat with a message", function()
 	--if state then
-	--while wait(0.1) do
-		--if state == true then
-			game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(chatMesage,"LocalPlayer")
-	--end end else end
+		while wait(0.1) do
+			local A_1=chatMesage
+			local A_2="All"
+			local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+			while true do
+				wait (chatInerval / 10)
+				--if state == true then
+					Event:FireServer (A_1, A_2)
+				--end
+			end
+		end
+	--else
+
+	--end
 end)
 
 MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spammed with", function(txt)
@@ -103,7 +114,16 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
+MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
+	chatInerval = s
+end)
+
 -- Combat
+
+local Combat = Window:NewTab("Combat")
+local CombatSection = Combat:NewSection("Combat")
+
+
 
 -- UI
 local UI = Window:NewTab("UI")
