@@ -1,4 +1,4 @@
--- Universal Hub V1.05
+-- Universal Hub V1.06
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
@@ -96,6 +96,25 @@ CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", f
 
 end)
 
+-- Render
+
+local Render = Window:NewTab("Render")
+local RenderSection = Render:NewSection("Render")
+
+RenderSection:NewToggle("Nighttime", "Will toggle day/night (Non FE)", function(state)
+	if state then
+		for i = 1, 12 do
+			game:GetService("Lighting").ClockTime -= 1
+			wait(0.1)
+		end
+	else
+		for i = 1, 12 do
+			game:GetService("Lighting").ClockTime += 1
+			wait(0.1)
+		end
+	end
+end)
+
 -- Misc
 local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
@@ -129,27 +148,21 @@ MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat
 	chatInerval = s
 end)
 
-MiscSection:NewButton("Chaos", "Will slowly destroy your game", function()
+MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
 	for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
 		v:Destroy()
 		wait(15)
 	end
 end)
 
-MiscSection:NewToggle("Fake Lag", "Will cause fake lag", function(state)
-	if state then
+MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
 		while true do
-			if state then
-				game.Players.LocalPlayer.Character.Torso.Anchored = true
-				game.Players.LocalPlayer.Character.Humanoid.Jump = true
-				wait(0.1)
-				game.Players.LocalPlayer.Character.Torso.Anchored = false
-				game.Players.LocalPlayer.Character.Humanoid.Sit = true
-				wait(0.1)
-			end
-		end
-	else
-
+			game.Players.LocalPlayer.Character.Torso.Anchored = true
+			game.Players.LocalPlayer.Character.Humanoid.Jump = true
+			wait(0.1)
+			game.Players.LocalPlayer.Character.Torso.Anchored = false
+			game.Players.LocalPlayer.Character.Humanoid.Sit = true
+			wait(0.1)
 	end
 end)
 
