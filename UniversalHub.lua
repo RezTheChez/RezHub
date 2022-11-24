@@ -114,7 +114,7 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
+MiscSection:NewSlider("Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
 	chatInerval = s
 end)
 
