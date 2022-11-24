@@ -155,11 +155,11 @@ end)
 
 -- Other Scripts
 
-local OtherScripts = Window:NewTab("Other Scripts")
-local OtherSection = Window:NewTab("Other Scripts")
+local OtherScriptsSection = Window:NewTab("Other Scripts")
+local OtherScripts = OtherScriptsSection:NewSection("Other Scripts")
 
 OtherScripts:NewButton("Dex", "Dex explorer V5", function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/fPP8bZ8Z"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
 end)
 
 OtherScripts:NewButton("Infinite Yield", "Tons of fun commands", function()
