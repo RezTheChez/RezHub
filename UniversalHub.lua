@@ -90,7 +90,7 @@ local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
 
 
-MiscSection:NewButton("Chat Spam", "Spams chat with a message", function()
+--[[MiscSection:NewButton("Chat Spam", "Spams chat with a message", function()
 	--if state then
 		while wait(0.1) do
 			local A_1=chatMesage
@@ -116,7 +116,7 @@ end)
 
 MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
 	chatInerval = s
-end)
+end) --]]
 
 -- Combat
 
