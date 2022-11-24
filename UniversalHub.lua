@@ -1,4 +1,4 @@
--- Universal Hub V1.02
+-- Universal Hub V1.04
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
@@ -13,13 +13,13 @@ local colors = {
 
 local LocalPlayer = Window:NewTab("LocalPlayer")
 local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
-local player = game:GetService("Players").LocalPlayer
+local player = game:GetService'Players'.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local UIS = game:GetService("UserInputService");
+local UIS = game:GetService'UserInputService'
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
-local chatInerval = 20
+local chatInerval = 1
 
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -85,6 +85,17 @@ PlayerSection:NewButton("InfJump", "Allows you to jump midair", function()
 	end)
 end)
 
+-- Render
+
+-- Combat
+
+local Combat = Window:NewTab("Combat")
+local CombatSection = Combat:NewSection("Combat")
+
+CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
+
+end)
+
 -- Misc
 local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
@@ -92,17 +103,17 @@ local MiscSection = Misc:NewSection("Misc")
 
 MiscSection:NewButton("Chat Spam", "Spams chat with a message", function()
 	--if state then
-		while wait(0.1) do
-			local A_1=chatMesage
-			local A_2="All"
-			local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
-			while true do
-				wait (chatInerval / 10)
-				--if state == true then
-					Event:FireServer (A_1, A_2)
-				--end
-			end
+	while wait(0.1) do
+		local A_1=chatMesage
+		local A_2="All"
+		local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+		while true do
+			wait (chatInerval / 10)
+			--if state == true then
+			Event:FireServer (A_1, A_2)
+			--end
 		end
+	end
 	--else
 
 	--end
@@ -114,18 +125,46 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Spam Interval", "How long it takes between each chat spam message", 40, 1, function(s)
-	while wait(0.1) do
-		chatInerval = s
+MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
+	chatInerval = s
+end)
+
+MiscSection:NewButton("Chaos", "Will slowly destroy your game", function()
+	for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+		v:Destroy()
+		wait(15)
 	end
 end)
 
--- Combat
+MiscSection:NewToggle("Fake Lag", "Will cause fake lag", function(state)
+	if state then
+		while true do
+			if state then
+				game.Players.LocalPlayer.Character.Torso.Anchored = true
+				game.Players.LocalPlayer.Character.Humanoid.Jump = true
+				wait(0.1)
+				game.Players.LocalPlayer.Character.Torso.Anchored = false
+				game.Players.LocalPlayer.Character.Humanoid.Sit = true
+				wait(0.1)
+			end
+		end
+	else
 
-local Combat = Window:NewTab("Combat")
-local CombatSection = Combat:NewSection("Combat")
+	end
+end)
 
+-- Other Scripts
 
+local OtherScripts = Window:NewTab("Other Scripts")
+local OtherSection = Window:NewTab("Other Scripts")
+
+OtherScripts:NewButton("Dex", "Dex explorer V5", function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/fPP8bZ8Z"))()
+end)
+
+OtherScripts:NewButton("Infinite Yield", "Tons of fun commands", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end)
 
 -- UI
 local UI = Window:NewTab("UI")
