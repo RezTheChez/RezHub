@@ -13,7 +13,7 @@ local colors = {
 
 local LocalPlayer = Window:NewTab("LocalPlayer")
 local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
-local player = game:GetService'Players'.LocalPlayer
+local player = game:GetService('Players').LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local UIS = game:GetService('UserInputService')
 
