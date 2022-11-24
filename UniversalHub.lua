@@ -19,7 +19,7 @@ local UIS = game:GetService'UserInputService'
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
-local chatInerval = 1
+--local chatInerval = 1
 
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
