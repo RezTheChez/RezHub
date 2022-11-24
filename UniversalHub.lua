@@ -1,3 +1,5 @@
+--Universal Hub V1.00
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script", colors)
 
