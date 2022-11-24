@@ -19,7 +19,7 @@ local UIS = game:GetService("UserInputService");
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
-local chatInerval = 1
+local chatInerval = 20
 
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -114,8 +114,10 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
-	chatInerval = s
+MiscSection:NewSlider("Spam Interval", "How long it takes between each chat spam message", 40, 1, function(s)
+	while wait(0.1) do
+		chatInerval = s
+	end
 end)
 
 -- Combat
