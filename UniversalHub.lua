@@ -23,8 +23,6 @@ local chatMesage = "RezHub on top"
 local chatInerval = 1
 local ESPColor = Color3.new(211, 255, 211)
 
---loadstring(game:HttpGet("https://pastebin.com/raw/RkUtdYb0"))()
-
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -42,7 +40,7 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 end)
 
 PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/XSqCPDbx"))
+	loadstring(game:HttpGet("https://pastebin.com/fPtT2Q1F"))
 end)
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
@@ -166,16 +164,17 @@ local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
 
 
-MiscSection:NewButton("Chat Spam", "Spams chat with a message", function()
+MiscSection:NewToggle("Chat Spam", "Spams chat with a message", function(state)
 	--if state then
 	while wait(0.1) do
 		local A_1=chatMesage
 		local A_2="All"
 		local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
-		while true do
-			wait (chatInerval / 10)
-			--if state == true then
-			Event:FireServer (A_1, A_2)
+		while wait(chatInerval / 10) do
+			if state then
+				--if state == true then
+				Event:FireServer (A_1, A_2)
+			end
 			--end
 		end
 	end
@@ -230,6 +229,10 @@ end)
 
 OtherScripts:NewButton("Chat Bypasser", "Allows you to say banned words in chat", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/daddysyn/synergy/additional/betterbypasser",true))()
+end)
+
+OtherScripts:NewButton("Ultimate Trolling Gui	", "The BEST UTG", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/PhoenixAceVFX/Roblox-Scripts/master/Admin%20Troll%20(2).lua",true))()
 end)
 
 -- UI
