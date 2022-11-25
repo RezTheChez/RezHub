@@ -40,7 +40,7 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 end)
 
 PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
-	loadstring(game:HttpGet("https://pastebin.com/fPtT2Q1F"))
+	loadstring(game:HttpGet("https://pastebin.com/raw/fPtT2Q1F"))
 end)
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
