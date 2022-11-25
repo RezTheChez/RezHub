@@ -1,4 +1,4 @@
--- Universal Hub Kavo UI V1.08
+-- Universal Hub V1.08
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.08", colors)
@@ -23,6 +23,7 @@ local chatMesage = "RezHub on top"
 local chatInerval = 1
 local ESPColor = Color3.new(211, 255, 211)
 
+lighting.ClockTime = 12
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
