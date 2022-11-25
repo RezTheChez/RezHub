@@ -1,4 +1,4 @@
--- Universal Hub V1.08
+-- Universal Hub Kavo UI V1.08
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.08", colors)
