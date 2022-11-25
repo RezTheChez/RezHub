@@ -1,7 +1,7 @@
 -- Universal Hub V1.07
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.07", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -20,7 +20,7 @@ local UIS = game:GetService'UserInputService'
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
 local chatInerval = 1
---local ESPColor = Color3.new(211, 255, 211)
+local ESPColor = Color3.new(211, 255, 211)
 
 --loadstring(game:HttpGet("https://pastebin.com/raw/RkUtdYb0"))()
 
@@ -40,12 +40,8 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 	game.Players.LocalPlayer:LoadCharacter()
 end)
 
-PlayerSection:NewToggle("Bypassed Fly", "Allows you to fly", function(state)
-	if state then
-		flying = true
-	else
-		flying = false
-	end
+PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/XSqCPDbx"))
 end)
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
@@ -101,8 +97,8 @@ end)
 local Render = Window:NewTab("Render")
 local RenderSection = Render:NewSection("Render")
 
-RenderSection:NewToggle("Nighttime", "Will toggle day/night (Non FE)", function(state)
-	if state then
+RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Night"}, function(currentOption)
+	if currentOption == "Night" then
 		for i = 1, 96 do
 			game:GetService("Lighting").ClockTime -= 0.125
 			wait(0.0125)
