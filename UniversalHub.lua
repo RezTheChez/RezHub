@@ -1,4 +1,4 @@
--- Universal Hub V1.06
+-- Universal Hub V1.07
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.02", colors)
@@ -20,6 +20,9 @@ local UIS = game:GetService'UserInputService'
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
 local chatInerval = 1
+--local ESPColor = Color3.new(211, 255, 211)
+
+--loadstring(game:HttpGet("https://pastebin.com/raw/RkUtdYb0"))()
 
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -37,14 +40,13 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 	game.Players.LocalPlayer:LoadCharacter()
 end)
 
-    --[[PlayerSection:NewToggle("Bypassed Fly", "Allows you to fly", function(state)
-        if state then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Nicuse/RobloxScripts/main/BypassedFly.lua"))()
-            Fly(true)
-        else
-            Fly(false)
-        end
-    end)--]]
+PlayerSection:NewToggle("Bypassed Fly", "Allows you to fly", function(state)
+	if state then
+		flying = true
+	else
+		flying = false
+	end
+end)
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
 	if state then
@@ -85,8 +87,6 @@ PlayerSection:NewButton("InfJump", "Allows you to jump midair", function()
 	end)
 end)
 
--- Render
-
 -- Combat
 
 local Combat = Window:NewTab("Combat")
@@ -103,15 +103,60 @@ local RenderSection = Render:NewSection("Render")
 
 RenderSection:NewToggle("Nighttime", "Will toggle day/night (Non FE)", function(state)
 	if state then
-		for i = 1, 12 do
-			game:GetService("Lighting").ClockTime -= 1
-			wait(0.1)
+		for i = 1, 96 do
+			game:GetService("Lighting").ClockTime -= 0.125
+			wait(0.0125)
 		end
 	else
-		for i = 1, 12 do
-			game:GetService("Lighting").ClockTime += 1
-			wait(0.1)
+		for i = 1, 96 do
+			game:GetService("Lighting").ClockTime += 0.125
+			wait(0.0125)
 		end
+	end
+end)
+
+RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
+	if state then
+		local esp_settings = { ---- table for esp settings 
+			textsize = 8,
+			colour = ESPColor
+		}
+
+		local gui = Instance.new("BillboardGui")
+		local esp = Instance.new("TextLabel",gui) ---- new instances to make the billboard gui and the textlabel
+
+
+
+		gui.Name = "Cracked esp"; ---- properties of the esp
+		gui.ResetOnSpawn = false
+		gui.AlwaysOnTop = true;
+		gui.LightInfluence = 0;
+		gui.Size = UDim2.new(1.75, 0, 1.75, 0);
+		esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+		esp.Text = ""
+		esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
+		esp.BorderSizePixel = 4;
+		esp.BorderColor3 = Color3.new(esp_settings.colour)
+		esp.BorderSizePixel = 0
+		esp.Font = "GothamSemibold"
+		esp.TextSize = esp_settings.textsize
+		esp.TextColor3 = Color3.fromRGB(esp_settings.colour) -- text colour
+
+		game:GetService("RunService").RenderStepped:Connect(function() ---- loops faster than a while loop :)
+			for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+				if v ~= game:GetService("Players").LocalPlayer and v.Character.Head:FindFirstChild("Cracked esp")==nil and v.TeamColor ~= game:GetService("Players").LocalPlayer.TeamColor then -- craeting checks for team check, local player etc
+					esp.Text = "{"..v.Name.."}"
+					gui:Clone().Parent = v.Character.Head
+				end
+			end
+		end)
+	end
+end)
+
+RenderSection:NewColorPicker("ESP Color", "Changes the color of the ESP", Color3.fromRGB(0,0,0), function(color3)
+	while true do
+		wait(0.1)
+		ESPColor = color3
 	end
 end)
 
@@ -156,13 +201,13 @@ MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
 end)
 
 MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
-		while true do
-			game.Players.LocalPlayer.Character.Torso.Anchored = true
-			game.Players.LocalPlayer.Character.Humanoid.Jump = true
-			wait(0.1)
-			game.Players.LocalPlayer.Character.Torso.Anchored = false
-			game.Players.LocalPlayer.Character.Humanoid.Sit = true
-			wait(0.1)
+	while true do
+		game.Players.LocalPlayer.Character.Torso.Anchored = true
+		game.Players.LocalPlayer.Character.Humanoid.Jump = true
+		wait(0.1)
+		game.Players.LocalPlayer.Character.Torso.Anchored = false
+		game.Players.LocalPlayer.Character.Humanoid.Sit = true
+		wait(0.1)
 	end
 end)
 
