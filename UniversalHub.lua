@@ -16,6 +16,7 @@ local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
 local player = game:GetService'Players'.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local UIS = game:GetService'UserInputService'
+local lighting = game:GetService("Lighting")
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
@@ -98,15 +99,19 @@ local Render = Window:NewTab("Render")
 local RenderSection = Render:NewSection("Render")
 
 RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Night"}, function(currentOption)
-	if currentOption == "Night" then
-		for i = 1, 96 do
-			game:GetService("Lighting").ClockTime -= 0.125
-			wait(0.0125)
+	if currentOption == "Day" then
+		if lighting.ClockTime == 0 then
+			for i = 1, 96 do
+				game:GetService("Lighting").ClockTime -= 0.125
+				wait(0.0125)
+			end
 		end
 	else
-		for i = 1, 96 do
-			game:GetService("Lighting").ClockTime += 0.125
-			wait(0.0125)
+		if lighting.ClockTime == 12 then
+			for i = 1, 96 do
+				game:GetService("Lighting").ClockTime += 0.125
+				wait(0.0125)
+			end
 		end
 	end
 end)
