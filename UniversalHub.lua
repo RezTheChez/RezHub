@@ -1,7 +1,7 @@
--- Universal Hub V1.07
+-- Universal Hub V1.08
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.07", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.08", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -202,13 +202,16 @@ MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
 end)
 
 MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
-	while true do
-		game.Players.LocalPlayer.Character.Torso.Anchored = true
-		game.Players.LocalPlayer.Character.Humanoid.Jump = true
-		wait(0.1)
-		game.Players.LocalPlayer.Character.Torso.Anchored = false
-		game.Players.LocalPlayer.Character.Humanoid.Sit = true
-		wait(0.1)
+	if state then
+		while wait(0.1) do
+			if state then
+				game.Players.LocalPlayer.Character.LowerTorso.Anchored = true
+				game.Players.LocalPlayer.Character.Humanoid.Jump = true
+				wait(0.1)
+				game.Players.LocalPlayer.Character.LowerTorso.Anchored = false
+				game.Players.LocalPlayer.Character.Humanoid.Sit = true
+			end
+		end
 	end
 end)
 
@@ -223,6 +226,10 @@ end)
 
 OtherScripts:NewButton("CMD-X", "Like infinite Yield but smoother and more commands", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source", true))()
+end)
+
+OtherScripts:NewButton("Chat Bypasser", "Allows you to say banned words in chat", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/daddysyn/synergy/additional/betterbypasser",true))()
 end)
 
 -- UI
