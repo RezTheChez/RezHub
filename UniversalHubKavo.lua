@@ -1,4 +1,4 @@
--- Universal Hub V1.08
+-- Universal Hub V1.09
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("RezHub Universal Script V1.08", colors)
@@ -40,9 +40,9 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 	game.Players.LocalPlayer:LoadCharacter()
 end)
 
-PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
+--[[PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
 	loadstring(game:HttpGet("https://pastebin.com/raw/fPtT2Q1F"))
-end)
+end)--]]
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
 	if state then
@@ -88,9 +88,9 @@ end)
 local Combat = Window:NewTab("Combat")
 local CombatSection = Combat:NewSection("Combat")
 
-CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
+--CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
 
-end)
+--end)
 
 -- Render
 
@@ -211,6 +211,34 @@ MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
 				game.Players.LocalPlayer.Character.LowerTorso.Anchored = false
 				game.Players.LocalPlayer.Character.Humanoid.Sit = true
 			end
+		end
+	end
+end)
+
+MiscSection:NewToggle("Anti-Afk", "Cancels roblox afk kick", function(state)
+	while wait(math.random(1, 11)) do
+		if state then
+			local BodyVelocity = Instance.new("BodyVelocity")
+			BodyVelocity.MaxForce = Vector3.new(1, 0, 1)
+			BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 1
+			BodyVelocity.Parent = character.HumanoidRootPart
+
+			local originalOrientation = character.HumanoidRootPart.Orientation
+
+			local connection = nil
+			connection = game:GetService("RunService").Stepped:Connect(function()
+				local newOrientation = character.HumanoidRootPart.Orientation
+
+				if newOrientation ~= originalOrientation then
+					originalOrientation = newOrientation
+
+					BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 1
+				end
+			end)
+
+			BodyVelocity.Destroying:Connect(function()
+				connection:Disconnect()
+			end)
 		end
 	end
 end)
