@@ -1,7 +1,7 @@
--- Universal Hub V1.09
+-- Universal Hub V1.10
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.09", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.10", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -14,7 +14,7 @@ local colors = {
 local LocalPlayer = Window:NewTab("LocalPlayer")
 local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
 local player = game:GetService'Players'.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
+local character = game:GetService("Workspace"):WaitForChild(player.Name)
 local UIS = game:GetService'UserInputService'
 local lighting = game:GetService("Lighting")
 local cam = game:GetService("Workspace").Camera
@@ -26,8 +26,8 @@ local ESPColor = Color3.new(211, 255, 211)
 local fly = false
 local flySpeed = 60
 
-
 lighting.ClockTime = 12
+
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
@@ -38,10 +38,6 @@ end)
 
 PlayerSection:NewSlider("FOV", "Changes your field of view (Default is 70)", 120, 30, function(s)
 	game.Players.LocalPlayer.Character.Parent.Camera.FieldOfView = s
-end)
-
-PlayerSection:NewButton("Respawn", "Respawns your character", function()
-	game.Players.LocalPlayer:LoadCharacter()
 end)
 
 PlayerSection:NewButton("E to Fly", "Allows you to fly", function()
@@ -161,6 +157,10 @@ PlayerSection:NewButton("InfJump", "Allows you to jump midair", function()
 	end)
 end)
 
+PlayerSection:NewButton("Respawn", "Respawns your character", function()
+	character.Humanoid.Health = 0
+end)
+
 -- Combat
 
 local Combat = Window:NewTab("Combat")
@@ -182,12 +182,22 @@ RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Nig
 				game:GetService("Lighting").ClockTime -= 0.125
 				wait(0.0125)
 			end
+			
+			while(currentOption == "Day") do
+				wait(0.1)
+				lighting.ClockTime = 12
+			end
 		end
 	else
 		if lighting.ClockTime == 12 then
 			for i = 1, 96 do
 				game:GetService("Lighting").ClockTime += 0.125
 				wait(0.0125)
+			end
+			
+			while(currentOption == "Night") do
+				wait(0.1)
+				lighting.ClockTime = 0
 			end
 		end
 	end
@@ -242,6 +252,27 @@ end)
 local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
 
+MiscSection:NewButton("ServerHop", "Switches to a less crowded server", function()
+	local Http = game:GetService("HttpService")
+	local TPS = game:GetService("TeleportService")
+	local Api = "https://games.roblox.com/v1/games/"
+	local _place = game.PlaceId
+	local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"
+	function ListServers(cursor)
+		local Raw = game:HttpGet(_servers .. ((cursor and "&cursor="..cursor) or ""))
+		return Http:JSONDecode(Raw) 
+	end
+	local Server, Next;
+	repeat
+		local Servers = ListServers(Next)
+		Server = Servers.data[1] Next = Servers.nextPageCursor
+	until Server TPS:TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
+end)
+
+MiscSection:NewButton("Rejoin", "Rejoins into the same server", function()	
+	game:GetService("TeleportService"):Teleport(game.PlaceId, player)
+end)
+
 
 MiscSection:NewToggle("Chat Spam", "Spams chat with a message", function(state)
 	--if state then
@@ -268,7 +299,7 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 50, 1, function(s)
+MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 40, 1, function(s)
 	chatInerval = s
 end)
 
