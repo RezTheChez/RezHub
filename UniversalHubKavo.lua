@@ -1,7 +1,7 @@
 -- Universal Hub V1.09
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.08", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.09", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -17,11 +17,15 @@ local player = game:GetService'Players'.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local UIS = game:GetService'UserInputService'
 local lighting = game:GetService("Lighting")
+local cam = game:GetService("Workspace").Camera
 
 local mouse = player:GetMouse()
 local chatMesage = "RezHub on top"
 local chatInerval = 1
 local ESPColor = Color3.new(211, 255, 211)
+local fly = false
+local flySpeed = 60
+
 
 lighting.ClockTime = 12
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
@@ -40,9 +44,83 @@ PlayerSection:NewButton("Respawn", "Respawns your character", function()
 	game.Players.LocalPlayer:LoadCharacter()
 end)
 
---[[PlayerSection:NewButton("Bypassed Fly", "Allows you to fly", function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/fPtT2Q1F"))
-end)--]]
+PlayerSection:NewButton("E to Fly", "Allows you to fly", function()
+	local wPressed = false
+	local sPressed = false
+	local aPressed = false
+	local dPressed = false
+
+	local flying = false
+	UIS.InputBegan:Connect(function(key, chat)
+		if chat then return end
+		if key.KeyCode == Enum.KeyCode.E then
+			if flying then --Stop Flying
+				flying = false
+				character.Animate.Disabled = false
+
+			else --Start Flying
+				flying = true
+
+				character.Animate.Disabled = true
+
+				local bv = Instance.new("BodyVelocity", character.PrimaryPart)
+				bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+				bv.Velocity = Vector3.new(0,0,0)
+				bv.Name = "FlightForce"
+
+				repeat wait(0.1) until flying == false
+				bv:Destroy()
+			end
+		end
+
+		if key.KeyCode == Enum.KeyCode.W then
+			wPressed = true
+		elseif key.KeyCode == Enum.KeyCode.S then
+			sPressed = true
+		elseif key.KeyCode == Enum.KeyCode.A then
+			aPressed = true
+		elseif key.KeyCode == Enum.KeyCode.D then
+			dPressed = true
+		end
+	end)
+
+	UIS.InputEnded:Connect(function(key)	
+		if key.KeyCode == Enum.KeyCode.W then
+			wPressed = false
+		elseif key.KeyCode == Enum.KeyCode.S then
+			sPressed = false
+		elseif key.KeyCode == Enum.KeyCode.A then
+			aPressed = false
+		elseif key.KeyCode == Enum.KeyCode.D then
+			dPressed = false
+		end
+	end)
+
+	while wait() do
+		if flying then
+			character.PrimaryPart:FindFirstChild("FlightForce").Velocity = Vector3.new(0,0,0)
+
+			if wPressed then
+				character.PrimaryPart:FindFirstChild("FlightForce").Velocity = cam.CFrame.LookVector * flySpeed
+			end
+			if sPressed then
+				character.PrimaryPart:FindFirstChild("FlightForce").Velocity = cam.CFrame.LookVector * -flySpeed
+			end
+			if aPressed then
+				character.PrimaryPart:FindFirstChild("FlightForce").Velocity = cam.CFrame.RightVector * -flySpeed
+			end
+			if dPressed then
+				character.PrimaryPart:FindFirstChild("FlightForce").Velocity = cam.CFrame.RightVector * flySpeed
+			end
+		else
+			wait(1)
+		end
+	end
+end)
+
+PlayerSection:NewSlider("Fly Speed", "Toggle your fly speed", 250, 1, function(s)
+	flySpeed = s
+end)
 
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
 	if state then
@@ -88,9 +166,9 @@ end)
 local Combat = Window:NewTab("Combat")
 local CombatSection = Combat:NewSection("Combat")
 
---CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
+CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
 
---end)
+end)
 
 -- Render
 
@@ -115,7 +193,7 @@ RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Nig
 	end
 end)
 
---[[RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
+RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
 	if state then
 		local esp_settings = { ---- table for esp settings 
 			textsize = 8,
@@ -158,7 +236,7 @@ RenderSection:NewColorPicker("ESP Color", "Changes the color of the ESP", Color3
 		wait(0.1)
 		ESPColor = color3
 	end
-end)--]]
+end)
 
 -- Misc
 local Misc = Window:NewTab("Misc")
@@ -190,7 +268,7 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 20, 1, function(s)
+MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 50, 1, function(s)
 	chatInerval = s
 end)
 
@@ -219,8 +297,8 @@ MiscSection:NewToggle("Anti-Afk", "Cancels roblox afk kick", function(state)
 	while wait(math.random(1, 11)) do
 		if state then
 			local BodyVelocity = Instance.new("BodyVelocity")
-			BodyVelocity.MaxForce = Vector3.new(1, 0, 1)
-			BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 1
+			BodyVelocity.MaxForce = Vector3.new(10, 0, 10)
+			BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 24
 			BodyVelocity.Parent = character.HumanoidRootPart
 
 			local originalOrientation = character.HumanoidRootPart.Orientation
@@ -232,7 +310,7 @@ MiscSection:NewToggle("Anti-Afk", "Cancels roblox afk kick", function(state)
 				if newOrientation ~= originalOrientation then
 					originalOrientation = newOrientation
 
-					BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 1
+					BodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 24
 				end
 			end)
 
