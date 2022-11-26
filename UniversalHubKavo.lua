@@ -115,7 +115,7 @@ RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Nig
 	end
 end)
 
-RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
+--[[RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
 	if state then
 		local esp_settings = { ---- table for esp settings 
 			textsize = 8,
@@ -158,7 +158,7 @@ RenderSection:NewColorPicker("ESP Color", "Changes the color of the ESP", Color3
 		wait(0.1)
 		ESPColor = color3
 	end
-end)
+end)--]]
 
 -- Misc
 local Misc = Window:NewTab("Misc")
