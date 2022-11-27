@@ -182,22 +182,12 @@ RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Nig
 				game:GetService("Lighting").ClockTime -= 0.125
 				wait(0.0125)
 			end
-			
-			while(currentOption == "Day") do
-				wait(0.1)
-				lighting.ClockTime = 12
-			end
 		end
 	else
 		if lighting.ClockTime == 12 then
 			for i = 1, 96 do
 				game:GetService("Lighting").ClockTime += 0.125
 				wait(0.0125)
-			end
-			
-			while(currentOption == "Night") do
-				wait(0.1)
-				lighting.ClockTime = 0
 			end
 		end
 	end
@@ -304,10 +294,11 @@ MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat
 end)
 
 MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
-	for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
-		v:Destroy()
-		wait(15)
-	end
+	local truss = Instance.new("TrussPart", game:GetService("Workspace"))
+	truss.Position = character.LeftFoot.Position
+	truss.Size = Vector3.new(2, 64, 2)
+	truss.Orientation = Vector3.new(0, 0, 0)
+	truss.Anchored = true
 end)
 
 MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
@@ -393,3 +384,7 @@ local CreditSection = Credits:NewSection("Credits")
 CreditSection:NewLabel("Scripting: !Bop#8928")
 CreditSection:NewLabel("Testing: !Bop#8928")
 CreditSection:NewLabel("Skidding: !Bop#8928")
+CreditSection:NewLabel("Fly Script: Hoainhat")
+CreditSection:NewLabel("Serverhop Script: Coldster")
+CreditSection:NewLabel("Rejoin Script: whathappened")
+CreditSection:NewLabel("Fake Lag Script: Eccentric")
