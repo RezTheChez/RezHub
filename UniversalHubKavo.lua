@@ -238,6 +238,38 @@ RenderSection:NewColorPicker("ESP Color", "Changes the color of the ESP", Color3
 	end
 end)
 
+-- World
+local World = Window:NewTab("World")
+local WorldSection = World:NewSection("World")
+
+WorldSection:NewButton("Delete Workspace", "Deletes the entire workspace", function()
+	for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+		v:Destroy()
+	end
+end
+	
+WorldSection:NewButton("Delete In Game UI", "Deletes every screengui in playergui", function()
+	for i, v in pairs(player.PlayerGui:GetChildren()) do
+		v:Destroy()
+	end
+end
+		
+WorldSection:NewToggle("Toggle In Game UI", "Toggles every screengui in playergui", function(state)
+	if state then
+		for i, v in pairs(player.PlayerGui:GetChildren()) do
+			v.enabled = not v.enabled
+		end
+	else
+		for i, v in pairs(player.PlayerGui:GetChildren()) do
+			v.enabled = not v.enabled
+		end
+	end
+end
+
+WorldSection:NewButton("Dex", "Edit the world (Non FE)", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
+end
+
 -- Misc
 local Misc = Window:NewTab("Misc")
 local MiscSection = Misc:NewSection("Misc")
@@ -360,7 +392,7 @@ OtherScripts:NewButton("Chat Bypasser", "Allows you to say banned words in chat"
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/daddysyn/synergy/additional/betterbypasser",true))()
 end)
 
-OtherScripts:NewButton("Ultimate Trolling Gui	", "The BEST UTG", function()
+OtherScripts:NewButton("Ultimate Trolling Gui", "The BEST UTG", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/PhoenixAceVFX/Roblox-Scripts/master/Admin%20Troll%20(2).lua",true))()
 end)
 
