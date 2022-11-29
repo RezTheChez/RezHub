@@ -109,3 +109,18 @@ If you have any suggestions for the script like modules or UI libraries you want
 **UI Custimization, Color Picker, UI, Customize the UI (Note: Only on Kavo UI)**
 
 **Destroy UI, Button, UI, Destroy the UI (Note: Only on Rayfield UI)**
+
+## Changelog
+
+V1.00: Created UI and added Speed, Jump, and FOV Sliders
+V1.01: Added Combat Section and Aimbot
+V1.02: Added Misc Section and Chat Spam
+V1.03: Added UI Section and customizable UI
+V1.04: Added Render Section, ESP, Esp Color, and Night/Day Toggle
+V1.05: Added NoClip, Fly, Fly Speed, and Infinite Jump
+V1.06: Converted UI to Rayfield
+V1.07: Added Chat Spam Message and Chat Spam Interval
+V1.08: Changed Fly to E to fly and added Fake Lag and 
+V1.09: Added Rejoin, Respawn, and Severhop to Misc Section
+v1.10: Added Other Scripts Section, Infinite Yield, CMD-X, Chat Bypasser, and Ultimate Trolling Gui
+V1.11: Added World section and Delete UI, Delete Workspace, and Toggle UI
