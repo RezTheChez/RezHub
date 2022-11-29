@@ -4,15 +4,15 @@ Why should you choose RezHub?
 
 Because we have:
 
--- **Daily Updates
+-- **Daily Updates**
 
--- **2 Different UI Libraries, with more coming soon
+-- **2 Different UI Libraries, with more coming soon**
 
--- **32 Working Features (Top universal script only has 14)
+-- **32 Working Features (Top universal script only has 14)**
 
--- **9 Unique features found only here
+-- **9 Unique features found only here**
 
--- **Open Sourced Code
+-- **Open Sourced Code**
 
 ## Kavo UI:
 
