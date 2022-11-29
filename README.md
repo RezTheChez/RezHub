@@ -2,10 +2,22 @@
 
 REZHUB UNIVERSAL SCRIPT!!!
 
+Kavo UI:
+
+```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubKavo.lua"))```
+
+Rayfield UI:
+
+```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
+
 Now, with all modules posted here on hithub!!!!!111!
+
 We have the script in 2 different libraries!
+
 More coming soon!
+
 We have unique features!!!
+
 Like truss trolling....
 
 wait wtf
