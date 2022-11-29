@@ -1,28 +1,25 @@
 # RezHub
 
-REZHUB UNIVERSAL SCRIPT!!!
+The most functional roblox universal script
 
-Kavo UI:
+V1.10 Is out now
+
+Use with 2 different UI libraries
+
+
+## Kavo UI:
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubKavo.lua"))```
 
-Rayfield UI:
+Pros: Reliable, Has full UI Custimization, 
+Cons: No destroy UI Button
+
+## Rayfield UI:
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
 
-Now, with all modules posted here on hithub!!!!!111!
 
-We have the script in 2 different libraries!
-
-More coming soon!
-
-We have unique features!!!
-
-Like truss trolling....
-
-wait wtf
-
-*Sections:*
+## *Sections:*
 
 **Player,
 Combat,
@@ -32,7 +29,7 @@ Misc,
 Other Scripts, and
 UI**
 
-*Modules:*
+## *Modules:*
 
 [-- (Name of module), (Type of module), (Category module is in), (Module Description) --]
 
