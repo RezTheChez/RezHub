@@ -12,13 +12,13 @@ wait wtf
 
 Sections:
 
-Player,
+**Player,
 Combat,
 Render,
 World,
 Misc,
 Other Scripts, and
-UI
+UI**
 
 Modules:
 
