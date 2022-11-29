@@ -8,7 +8,7 @@ Because we have:
 
 -- 2 Different UI Libraries, with more coming soon
 
--- 31 Working Features (Top universal script only has 14)
+-- 32 Working Features (Top universal script only has 14)
 
 -- 9 Unique features found only here
 
@@ -71,6 +71,8 @@ UI**
 **Delete Workspace, Button, World, Delete the workspace (Note: Non FE)**
 
 **Delete In Game UI, Button, World, Delete every Screengui in PlayerGui (Note: Non FE)**
+
+**Toggle In Game UI, Toggle, World, Toggle every Screengui in PlayerGui (Note: Non FE)**
 
 **Truss, Button, World, Spawn a truss in front of you that only you can see and climb. Good for trolling (Note: Non FE)**
 
