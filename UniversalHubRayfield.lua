@@ -8,15 +8,15 @@ local Window = Rayfield:CreateWindow({
 	LoadingSubtitle = "by ReztheChez",
 	ConfigurationSaving = {
 		Enabled = true,
-		FolderName = nil, -- Create a custom folder for your hub/game
+		FolderName = nil,
 		FileName = "Rez Hub"
 	},
 	Discord = {
 		Enabled = true,
-		Invite = "UGVxEQNWaW", -- The Discord invite code, do not include discord.gg/
-		RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+		Invite = "UGVxEQNWaW",
+		RememberJoins = true
 	},
-	KeySystem = false, -- Set this to true to use our key system
+	KeySystem = false
 })
 local player = game:GetService'Players'.LocalPlayer
 local character = game:GetService("Workspace"):WaitForChild(player.Name)
