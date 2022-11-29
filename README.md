@@ -16,6 +16,8 @@ Because we have:
 
 -- **Community Suggestions**
 
+-- **No Key**
+
 ## Kavo UI:
 
 **Pros:** Very Reliable, Full UI Customization, Esp Color Picker, and Toggleable UI With Custom Keybind
