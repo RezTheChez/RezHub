@@ -10,7 +10,7 @@ Because we have:
 
 -- **32 Working Features (Top universal script only has 14)**
 
--- **9 Unique features only found on RezHub**
+-- **9 Unique modules only found on RezHub**
 
 -- **Open Sourced Code**
 
