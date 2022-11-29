@@ -34,7 +34,7 @@ Because we have:
 
 ## Community Suggestions
 
-If you have any suggestions for the script like modules or UI libraries you want, join the [discord](discord.gg/UGVxEQNWaW)!
+If you have any suggestions for the script like modules or UI libraries you want, join the [discord!](https://discord.gg/UGVxEQNWaW)
 
 ## Sections:
 
