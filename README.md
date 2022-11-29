@@ -1,10 +1,16 @@
 # RezHub
 
-The most functional roblox universal script
+Why should you choose RezHub?
 
-V1.10 Is out now with updates daily!
+Because we have:
 
-Compaible with 2 different UI libraries!
+-- Daily Updates
+-- 2 Different UI Libraries, with more coming soon
+-- 31 Working Features
+-- 4 Unique features found only here
+-- Open Sourced Code
+
+View the libraries:
 
 
 ## Kavo UI:
