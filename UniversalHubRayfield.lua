@@ -209,6 +209,52 @@ local ESPColor = Render:CreateToggle({
 	end,
 })
 
+-- World
+local World = Window:CreateTab("World", nil) -- Will add when I get home
+local WorldSection = Window:CreateSection("World")
+
+local DeleteWorkspace = World:CreateButton({
+	Name = "Delete Workspace",
+	Callback = function()
+		for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+			v:Destroy()
+		end
+	end,
+end
+
+local DeleteUI = World:CreateToggle({
+	Name = "Toggle In Game UI",
+	CurrentValue = false,
+	Flag = "ToggleUI",
+	Callback = function(Value)
+		if Value then
+			for i, v in pairs(player.PlayerGui:GetChildren()) do
+				v.enabled = not v.enabled
+			end
+		else
+			for i, v in pairs(player.PlayerGui:GetChildren()) do
+				v.enabled = not v.enabled
+			end
+		end
+	end,
+end
+
+local Dex = World:CreateButton({
+	Name = "Dex",
+	Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
+	end,
+end
+
+local ToggleUI = World:CreateButton({
+	Name = "Toggle In Game UI",
+	Callback = function()
+		for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+			v:Destroy()
+		end
+	end,
+end
+
 -- Misc
 local Misc = Window:CreateTab("Misc", 11684391939)
 local MiscSection = Misc:CreateSection("Misc")
