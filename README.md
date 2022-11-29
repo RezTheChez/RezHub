@@ -10,7 +10,7 @@ Like truss trolling....
 
 wait wtf
 
-Sections:
+*Sections:*
 
 **Player,
 Combat,
@@ -20,7 +20,7 @@ Misc,
 Other Scripts, and
 UI**
 
-Modules:
+*Modules:*
 
 [-- (Name of module), (Type of module), (Category module is in), (Module Description) --]
 
