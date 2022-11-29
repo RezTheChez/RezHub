@@ -20,8 +20,8 @@ local lighting = game:GetService("Lighting")
 local cam = game:GetService("Workspace").Camera
 
 local mouse = player:GetMouse()
-local chatMesage = "RezHub on top"
-local chatInerval = 1
+local chatMessage = "RezHub on top"
+local chatInterval = 1
 local ESPColor = Color3.new(211, 255, 211)
 local fly = false
 local flySpeed = 60
@@ -299,10 +299,10 @@ end)
 MiscSection:NewToggle("Chat Spam", "Spams chat with a message", function(state)
 	--if state then
 	while wait(0.1) do
-		local A_1=chatMesage
+		local A_1=chatMessage
 		local A_2="All"
 		local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
-		while wait(chatInerval) do
+		while wait(chatInterval) do
 			if state then
 				--if state == true then
 				Event:FireServer (A_1, A_2)
@@ -317,12 +317,12 @@ end)
 
 MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spammed with", function(txt)
 	while wait(0.1) do
-		chatMesage = txt
+		chatMessage = txt
 	end
 end)
 
 MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 5, 1, function(s)
-	chatInerval = s
+	chatInterval = s
 end)
 
 MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
