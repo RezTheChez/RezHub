@@ -2,21 +2,26 @@
 
 The most functional roblox universal script
 
-V1.10 Is out now
+V1.10 Is out now with updates daily!
 
-Use with 2 different UI libraries
+Compaible with 2 different UI libraries!
 
 
 ## Kavo UI:
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubKavo.lua"))```
 
-Pros: Reliable, Has full UI Custimization, 
+Pros: Very Reliable, Full UI Customization, Esp Color Picker, and Toggleable UI With Custom Keybind
+
 Cons: No destroy UI Button
 
 ## Rayfield UI:
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
+
+Pros: Very Reliable, Smooth UI, Section Icons, Smoother Sliders, and Destroy UI Buttons,
+
+Cons: No Esp Color Picker, No UI Customization, No Keybinds
 
 
 ## *Sections:*
