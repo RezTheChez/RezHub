@@ -34,7 +34,7 @@ View the libraries:
 **Cons:** No Esp Color Picker, No UI Customization, No Keybinds
 
 
-## *Sections:*
+## Sections:
 
 **Player,
 Combat,
@@ -44,7 +44,7 @@ Misc,
 Other Scripts, and
 UI**
 
-## *Modules:*
+## Modules:
 
 [-- (Name of module), (Type of module), (Category module is in), (Module Description) --]
 
