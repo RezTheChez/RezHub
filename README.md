@@ -38,15 +38,9 @@ Because we have:
 
 If you have any suggestions for the script like modules or UI libraries you want, join the [discord!](https://discord.gg/UGVxEQNWaW)
 
-## Sections:
+## UI Sections:
 
-**Player,
-Combat,
-Render,
-World,
-Misc,
-Other Scripts, and
-UI**
+**Player, Combat, Render, World, Misc, Other Scripts, and UI**
 
 ## Modules:
 
