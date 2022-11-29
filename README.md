@@ -5,9 +5,13 @@ Why should you choose RezHub?
 Because we have:
 
 -- Daily Updates
+
 -- 2 Different UI Libraries, with more coming soon
--- 31 Working Features
+
+-- 31 Working Features (Top universal script only has 14)
+
 -- 4 Unique features found only here
+
 -- Open Sourced Code
 
 View the libraries:
