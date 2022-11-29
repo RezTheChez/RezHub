@@ -14,9 +14,6 @@ Because we have:
 
 -- Open Sourced Code
 
-View the libraries:
-
-
 ## Kavo UI:
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubKavo.lua"))```
