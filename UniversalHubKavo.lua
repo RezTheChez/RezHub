@@ -302,7 +302,7 @@ MiscSection:NewToggle("Chat Spam", "Spams chat with a message", function(state)
 		local A_1=chatMesage
 		local A_2="All"
 		local Event=game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
-		while wait(chatInerval / 10) do
+		while wait(chatInerval) do
 			if state then
 				--if state == true then
 				Event:FireServer (A_1, A_2)
@@ -321,7 +321,7 @@ MiscSection:NewTextBox("Chat Spam Message", "The message you want chat to be spa
 	end
 end)
 
-MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 40, 1, function(s)
+MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat spam message", 5, 1, function(s)
 	chatInerval = s
 end)
 
