@@ -14,6 +14,8 @@ Because we have:
 
 -- **Open Sourced Code**
 
+-- **Community Suggestions**
+
 ## Kavo UI:
 
 **Pros:** Very Reliable, Full UI Customization, Esp Color Picker, and Toggleable UI With Custom Keybind
@@ -29,6 +31,10 @@ Because we have:
 **Cons:** No Esp Color Picker, No UI Customization, No Keybinds
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
+
+## Community Suggestions
+
+If you have any suggestions for the script like modules or UI libraries you want, join the [discord](discord.gg/UGVxEQNWaW)!
 
 ## Sections:
 
