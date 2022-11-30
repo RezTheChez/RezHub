@@ -8,7 +8,7 @@ Because we have:
 
 -- **2 Different UI Libraries, with more coming soon**
 
--- **32 Working Features (Top universal script only has 14)**
+-- **31 Working Features (Top universal script only has 14)**
 
 -- **9 Unique modules only found on RezHub**
 
@@ -66,9 +66,7 @@ If you have any suggestions for the script like modules or UI libraries you want
 
 **Time Of Day, Dropdown, Render, Change the time of day to day or night**
 
-**ESP, Toggle, Render, See every non-teammate through walls**
-
-**ESP Color, Color Picker, Render, Change the color of the ESP (Note: Only on Kavo UI)**
+**ESP, Button, Render, See every non-teammate through walls**
 
 **Delete Workspace, Button, World, Delete the workspace (Note: Non FE)**
 
@@ -80,7 +78,7 @@ If you have any suggestions for the script like modules or UI libraries you want
 
 **Dex, Button, World, Loads in dex**
 
-**Moonwalk, Toggle, World, MOOKWALK?!?!**
+**Moonwalk, Toggle, World, MOOKWALK?!?! (Note: Is in beta)**
 
 **ServerHop, Button, Misc, Join a different server of the game you are playing**
 
