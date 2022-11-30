@@ -1,7 +1,7 @@
--- Universal Hub V1.10
+-- Universal Hub V1.11
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.10", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.11", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
@@ -11,33 +11,51 @@ local colors = {
 	ElementColor = Color3.fromRGB(20, 20, 20)
 }
 
-local LocalPlayer = Window:NewTab("LocalPlayer")
-local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
-local player = game:GetService'Players'.LocalPlayer
+local player = game:GetService("Players").LocalPlayer
 local character = game:GetService("Workspace"):WaitForChild(player.Name)
-local UIS = game:GetService'UserInputService'
+local UIS = game:GetService("UserInputService")
 local lighting = game:GetService("Lighting")
 local cam = game:GetService("Workspace").Camera
 
 local mouse = player:GetMouse()
 local chatMessage = "RezHub on top"
 local chatInterval = 1
-local ESPColor = Color3.new(211, 255, 211)
+local ESPColor = Color3.fromRGB(211, 255, 211)
 local fly = false
 local flySpeed = 60
 
 lighting.ClockTime = 12
 
+function getClosestPlayer()
+	local closestPlayer = nil
+	local closestDistance = math.huge
+	
+	for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+		if v ~= player and v.TeamColor ~= player.TeamColor then
+			local distance = (character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.position).magnitude
+			if distance < closestDistance then
+				closestDistance = distance
+				closestPlayer = v
+			end
+		end
+	end
+	return closestPlayer
+end
+
+
+local LocalPlayer = Window:NewTab("LocalPlayer")
+local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
+
 PlayerSection:NewSlider("Speed", "Changes your speed (Default is 16)", 250, 1, function(s)
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+	character.Humanoid.WalkSpeed = s
 end)
 
 PlayerSection:NewSlider("Jump Height", "Changes your jump height (Default is 50)", 500, 1, function(s)
-	game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+	character.Humanoid.JumpPower = s
 end)
 
 PlayerSection:NewSlider("FOV", "Changes your field of view (Default is 70)", 120, 30, function(s)
-	game.Players.LocalPlayer.Character.Parent.Camera.FieldOfView = s
+	character.Parent.Camera.FieldOfView = s
 end)
 
 PlayerSection:NewButton("E to Fly", "Allows you to fly", function()
@@ -121,8 +139,6 @@ end)
 PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
 	if state then
 		while true do
-			player = game.Players.LocalPlayer
-			character = player.Character
 			for _, v in pairs(character:GetDescendants()) do
 				pcall(function()
 					if v:IsA("BasePart") then
@@ -135,7 +151,6 @@ PlayerSection:NewToggle("NoClip", "Lets you walk through walls", function(state)
 		end
 	else
 		while true do
-			player = game.Players.LocalPlayer
 			character = player.Character
 
 			for _, v in pairs(character:GetDescendants()) do
@@ -167,7 +182,21 @@ local Combat = Window:NewTab("Combat")
 local CombatSection = Combat:NewSection("Combat")
 
 CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", function()
-
+	_G.aim = false
+	UIS.InputBegan:Connect(function(input)
+		if input == Enum.UserInputType.MouseButton2 then
+			_G.aim = true
+			while wait() do
+				cam.CFrame = CFrame.new(cam.CFrame.Position, getClosestPlayer().Character.Head.Position
+			end
+		end
+	end)
+			
+	UIS.InputEnded:Connect(function(input)
+		if input == Enum.UserInputType.MouseButton2 then
+			_G.aim = false
+		end
+	end)
 end)
 
 -- Render
@@ -195,15 +224,37 @@ end)
 
 RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
 	if state then
-		local esp_settings = { ---- table for esp settings 
+		local esp_settings = {
 			textsize = 8,
-			colour = ESPColor
+			color = ESPColor
 		}
 
 		local gui = Instance.new("BillboardGui")
-		local esp = Instance.new("TextLabel",gui) ---- new instances to make the billboard gui and the textlabel
-
-
+		local esp = Instance.new("TextLabel", gui)
+				
+		gui.Name = "Cracked Esp"
+		gui.ResetOnSpawn = false
+		gui.AlwaysOnTop = true
+		gui.LightInfluence = 0
+		gui.Size = UDim2.new(1.75, 0, 1.75, 0)
+		esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		esp.Text = ""
+		esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001)
+		esp.BorderSizePixel = 4
+		esp.BorderColor3 = Color3.new(esp_settings.color)
+		esp.BorderSizePixel = 0
+		esp.Font = "GothamSemibold"
+		esp.TextSize = esp_settings.TextSize
+		esp.TextColor3 = Color3.fromRGB(255, 0, 0)
+				
+		game:GetService("RunService").RenderStepped:Connect(function()
+			for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+				if v ~= player and v.Character.Head:FindFirstChild("Cracked Esp") ~= nil and v.TeamColor ~= player.TeamColor then
+					esp.Text = "{"..v.Name.."}"
+					gui:Clone().Parent = v.Character.Head
+				end
+			end
+		end
 
 		gui.Name = "Cracked esp"; ---- properties of the esp
 		gui.ResetOnSpawn = false
@@ -288,7 +339,7 @@ MiscSection:NewButton("ServerHop", "Switches to a less crowded server", function
 	repeat
 		local Servers = ListServers(Next)
 		Server = Servers.data[1] Next = Servers.nextPageCursor
-	until Server TPS:TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
+	until Server TPS:TeleportToPlaceInstance(_place,Server.id,player)
 end)
 
 MiscSection:NewButton("Rejoin", "Rejoins into the same server", function()	
@@ -337,11 +388,11 @@ MiscSection:NewToggle("Fake Lag", "Causes fake lag", function(state)
 	if state then
 		while wait(0.1) do
 			if state then
-				game.Players.LocalPlayer.Character.LowerTorso.Anchored = true
-				game.Players.LocalPlayer.Character.Humanoid.Jump = true
+				character.LowerTorso.Anchored = true
+				character.Humanoid.Jump = true
 				wait(0.1)
-				game.Players.LocalPlayer.Character.LowerTorso.Anchored = false
-				game.Players.LocalPlayer.Character.Humanoid.Sit = true
+				character.LowerTorso.Anchored = false
+				character.Humanoid.Sit = true
 			end
 		end
 	end
