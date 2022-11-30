@@ -15,7 +15,6 @@ local player = game:GetService("Players").LocalPlayer
 local character = game:GetService("Workspace"):WaitForChild(player.Name)
 local UIS = game:GetService("UserInputService")
 local lighting = game:GetService("Lighting")
-local cam = game:GetService("Workspace").Camera
 
 local mouse = player:GetMouse()
 local chatMessage = "RezHub on top"
@@ -40,6 +39,12 @@ function getClosestPlayer()
 	end
 	return closestPlayer
 end
+
+game:GetService("Players").LocalPlayer.Character.Humanoid.Died:Connect(function()
+	wait(4)
+	player = game:GetService("Players").LocalPlayer
+	character = player.Character
+end)
 
 
 local LocalPlayer = Window:NewTab("LocalPlayer")
@@ -185,9 +190,10 @@ CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", f
 	UIS.InputBegan:Connect(function(input)
 		if input == Enum.UserInputType.MouseButton2 then
 			_G.aim = true
-			while wait() do
-				cam.CFrame = CFrame.new(cam.CFrame.Position, getClosestPlayer().Character.Head.Position)
-			end
+			game:GetService("RunService").RenderStepped:Connect(function()
+				game:GetService("Workspace").Camera.CFrame = CFrame.new(game:GetService("Workspace").Camera.CFrame.Position, getClosestPlayer().Character.Head.Position)
+				if _G.aim == false then return end
+			end)
 		end
 	end)
 
@@ -262,7 +268,7 @@ RenderSection:NewButton("ESP", "Gives you ESP", function()
 			end)  
 		end)
 	end
-	ESP(true)
+	ESP()
 end)
 
 -- World
@@ -399,6 +405,21 @@ MiscSection:NewToggle("Anti-Afk", "Cancels roblox afk kick", function(state)
 				connection:Disconnect()
 			end)
 		end
+	end
+end)
+
+MiscSection:NewToggle("Moonwalk", "Do the moonwalk :)", function(state)
+	if state then
+		repeat
+			local part = Instance.new("Part", Workspace)
+			part.Position = character.LeftFoot
+			part.size = Vector3.new(10, 10, 10)
+			part.Transparency = 1
+			part.Anchored = true
+			part.CanCollide = true
+			wait(2)
+			part:Destroy
+		until state == false
 	end
 end)
 
