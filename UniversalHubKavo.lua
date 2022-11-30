@@ -29,7 +29,7 @@ lighting.ClockTime = 12
 function getClosestPlayer()
 	local closestPlayer = nil
 	local closestDistance = math.huge
-	
+
 	for i, v in pairs(game:GetService("Players"):GetPlayers()) do
 		if v ~= player and v.TeamColor ~= player.TeamColor then
 			local distance = (character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.position).magnitude
@@ -187,11 +187,11 @@ CombatSection:NewButton("Aimbot", "Hold down RMB to lock onto closest player", f
 		if input == Enum.UserInputType.MouseButton2 then
 			_G.aim = true
 			while wait() do
-				cam.CFrame = CFrame.new(cam.CFrame.Position, getClosestPlayer().Character.Head.Position
+				cam.CFrame = CFrame.new(cam.CFrame.Position, getClosestPlayer().Character.Head.Position)
 			end
 		end
 	end)
-			
+
 	UIS.InputEnded:Connect(function(input)
 		if input == Enum.UserInputType.MouseButton2 then
 			_G.aim = false
@@ -231,7 +231,7 @@ RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
 
 		local gui = Instance.new("BillboardGui")
 		local esp = Instance.new("TextLabel", gui)
-				
+
 		gui.Name = "Cracked Esp"
 		gui.ResetOnSpawn = false
 		gui.AlwaysOnTop = true
@@ -246,34 +246,10 @@ RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
 		esp.Font = "GothamSemibold"
 		esp.TextSize = esp_settings.TextSize
 		esp.TextColor3 = Color3.fromRGB(255, 0, 0)
-				
+
 		game:GetService("RunService").RenderStepped:Connect(function()
 			for i, v in pairs(game:GetService("Players"):GetPlayers()) do
 				if v ~= player and v.Character.Head:FindFirstChild("Cracked Esp") ~= nil and v.TeamColor ~= player.TeamColor then
-					esp.Text = "{"..v.Name.."}"
-					gui:Clone().Parent = v.Character.Head
-				end
-			end
-		end
-
-		gui.Name = "Cracked esp"; ---- properties of the esp
-		gui.ResetOnSpawn = false
-		gui.AlwaysOnTop = true;
-		gui.LightInfluence = 0;
-		gui.Size = UDim2.new(1.75, 0, 1.75, 0);
-		esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-		esp.Text = ""
-		esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
-		esp.BorderSizePixel = 4;
-		esp.BorderColor3 = Color3.new(esp_settings.colour)
-		esp.BorderSizePixel = 0
-		esp.Font = "GothamSemibold"
-		esp.TextSize = esp_settings.textsize
-		esp.TextColor3 = Color3.fromRGB(esp_settings.colour) -- text colour
-
-		game:GetService("RunService").RenderStepped:Connect(function() ---- loops faster than a while loop :)
-			for i,v in pairs (game:GetService("Players"):GetPlayers()) do
-				if v ~= game:GetService("Players").LocalPlayer and v.Character.Head:FindFirstChild("Cracked esp")==nil and v.TeamColor ~= game:GetService("Players").LocalPlayer.TeamColor then -- craeting checks for team check, local player etc
 					esp.Text = "{"..v.Name.."}"
 					gui:Clone().Parent = v.Character.Head
 				end
@@ -291,20 +267,20 @@ end)
 
 -- World
 local World = Window:NewTab("World")
-local WorldSection = World:NewSection("World")
+local WorldSection = World:NewSection("WorldSection")
 
 WorldSection:NewButton("Delete Workspace", "Deletes the entire workspace", function()
 	for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
 		v:Destroy()
 	end
-end
-	
+end)
+
 WorldSection:NewButton("Delete In Game UI", "Deletes every screengui in playergui", function()
 	for i, v in pairs(player.PlayerGui:GetChildren()) do
 		v:Destroy()
 	end
-end
-		
+end)
+
 WorldSection:NewToggle("Toggle In Game UI", "Toggles every screengui in playergui", function(state)
 	if state then
 		for i, v in pairs(player.PlayerGui:GetChildren()) do
@@ -315,11 +291,11 @@ WorldSection:NewToggle("Toggle In Game UI", "Toggles every screengui in playergu
 			v.enabled = not v.enabled
 		end
 	end
-end
+end)
 
 WorldSection:NewButton("Dex", "Edit the world (Non FE)", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/peyton2465/Dex/master/out.lua"))()
-end
+end)
 
 -- Misc
 local Misc = Window:NewTab("Misc")
