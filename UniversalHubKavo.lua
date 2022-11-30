@@ -42,6 +42,12 @@ function getClosestPlayer()
 	return closestPlayer
 end
 
+game:GetService("Players").LocalPlayer.Character.Humanoid.Died:Connect(function()
+	wait(4)
+	player = game:GetService("Players").LocalPlayer
+	character = player.Character
+end)
+
 
 local LocalPlayer = Window:NewTab("LocalPlayer")
 local PlayerSection = LocalPlayer:NewSection("LocalPlayer")
