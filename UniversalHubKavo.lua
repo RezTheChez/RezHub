@@ -20,7 +20,6 @@ local cam = game:GetService("Workspace").Camera
 local mouse = player:GetMouse()
 local chatMessage = "RezHub on top"
 local chatInterval = 1
-local ESPColor = Color3.fromRGB(211, 255, 211)
 local fly = false
 local flySpeed = 60
 
@@ -41,12 +40,6 @@ function getClosestPlayer()
 	end
 	return closestPlayer
 end
-
-game:GetService("Players").LocalPlayer.Character.Humanoid.Died:Connect(function()
-	wait(4)
-	player = game:GetService("Players").LocalPlayer
-	character = player.Character
-end)
 
 
 local LocalPlayer = Window:NewTab("LocalPlayer")
@@ -228,47 +221,48 @@ RenderSection:NewDropdown("Time Of Day", "Changes the time of day", {"Day", "Nig
 	end
 end)
 
-RenderSection:NewToggle("ESP", "Toggles player esp", function(state)
-	if state then
-		local esp_settings = {
-			textsize = 8,
-			color = ESPColor
-		}
+RenderSection:NewButton("ESP", "Gives you ESP", function()
+	local color = BrickColor.new(200, 100, 200)
+	local transparency = 0.8
 
-		local gui = Instance.new("BillboardGui")
-		local esp = Instance.new("TextLabel", gui)
+	local Players = game:GetService("Players")
 
-		gui.Name = "Cracked Esp"
-		gui.ResetOnSpawn = false
-		gui.AlwaysOnTop = true
-		gui.LightInfluence = 0
-		gui.Size = UDim2.new(1.75, 0, 1.75, 0)
-		esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		esp.Text = ""
-		esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001)
-		esp.BorderSizePixel = 4
-		esp.BorderColor3 = Color3.new(esp_settings.color)
-		esp.BorderSizePixel = 0
-		esp.Font = "GothamSemibold"
-		esp.TextSize = esp_settings.TextSize
-		esp.TextColor3 = Color3.fromRGB(255, 0, 0)
-
-		game:GetService("RunService").RenderStepped:Connect(function()
-			for i, v in pairs(game:GetService("Players"):GetPlayers()) do
-				if v ~= player and v.Character.Head:FindFirstChild("Cracked Esp") ~= nil and v.TeamColor ~= player.TeamColor then
-					esp.Text = "{"..v.Name.."}"
-					gui:Clone().Parent = v.Character.Head
-				end
+	local function _ESP(c)
+		repeat wait() until c.PrimaryPart ~= nil
+		for i,p in pairs(c:GetChildren()) do
+			if p.ClassName == "Part" or p.ClassName == "MeshPart" then
+				if p:FindFirstChild("shit") then p.shit:Destroy() end
+				local a = Instance.new("BoxHandleAdornment",p)
+				a.Name = "shit"
+				a.Size = p.Size
+				a.Color = color
+				a.Transparency = transparency
+				a.AlwaysOnTop = true    
+				a.Visible = true    
+				a.Adornee = p
+				a.ZIndex = true    
 			end
+		end
+	end
+	
+	local function ESP()
+		for i,v in pairs(Players:GetChildren()) do
+			if v ~= game.Players.LocalPlayer then
+				if v.Character then
+					_ESP(v.Character)
+				end
+				v.CharacterAdded:Connect(function(chr)
+					_ESP(chr)
+				end)
+			end
+		end
+		Players.PlayerAdded:Connect(function(player)
+			player.CharacterAdded:Connect(function(chr)
+				_ESP(chr)
+			end)  
 		end)
 	end
-end)
-
-RenderSection:NewColorPicker("ESP Color", "Changes the color of the ESP", Color3.fromRGB(0,0,0), function(color3)
-	while true do
-		wait(0.1)
-		ESPColor = color3
-	end
+	ESP(true)
 end)
 
 -- World
