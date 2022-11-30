@@ -28,7 +28,7 @@ Because we have:
 
 ## Rayfield UI:
 
-**Pros:** Very Reliable, Smooth UI, Section Icons, Smoother Sliders, and Destroy UI Buttons,
+**Pros:** Very Reliable, Smooth UI, Section Icons, Smoother Sliders, Notifications, and Destroy UI Buttons
 
 **Cons:** No Esp Color Picker, No UI Customization, No Keybinds
 
