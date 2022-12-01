@@ -1,9 +1,9 @@
--- Universal Hub V1.10
+-- Universal Hub V1.12
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-	Name = "Rezhub Universal V1.10",
+	Name = "Rezhub Universal V1.12",
 	LoadingTitle = "Rayfield Interface Suite",
 	LoadingSubtitle = "by ReztheChez",
 	ConfigurationSaving = {
