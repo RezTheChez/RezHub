@@ -33,9 +33,30 @@ local flySpeed = 60
 
 lighting.ClockTime = 12
 
+function getClosestPlayer()
+	local closestPlayer = nil
+	local closestDistance = math.huge
+
+	for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+		if v ~= player and v.TeamColor ~= player.TeamColor then
+			local distance = (character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.position).magnitude
+			if distance < closestDistance then
+				closestDistance = distance
+				closestPlayer = v
+			end
+		end
+	end
+	return closestPlayer
+end
+
+game:GetService("Players").LocalPlayer.Character.Humanoid.Died:Connect(function()
+	wait(4)
+	player = game:GetService("Players").LocalPlayer
+	character = player.Character
+end)
+
 local LocalPlayer = Window:CreateTab("LocalPlayer", 11684390723)
 local PlayerSection = LocalPlayer:CreateSection("LocalPlayer")
-
 
 local SpeedSlider = LocalPlayer:CreateSlider({
 	Name = "Change Speed",
@@ -154,6 +175,22 @@ local CombatSection = Combat:CreateSection("Combat")
 local Aimbot = Combat:CreateButton({
 	Name = "Aimbot",
 	Callback = function(Value)
+	_G.aim = false
+	UIS.InputBegan:Connect(function(input)
+		if input == Enum.UserInputType.MouseButton2 then
+			_G.aim = true
+			game:GetService("RunService").RenderStepped:Connect(function()
+				game:GetService("Workspace").Camera.CFrame = CFrame.new(game:GetService("Workspace").Camera.CFrame.Position, getClosestPlayer().Character.Head.Position)
+				if _G.aim == false then return end
+			end)
+		end
+	end)
+
+	UIS.InputEnded:Connect(function(input)
+		if input == Enum.UserInputType.MouseButton2 then
+			_G.aim = false
+		end
+	end)
 	end,
 })
 -- Render
@@ -167,19 +204,9 @@ local TimeOfDay = Render:CreateDropdown({
 	Flag = "TimeOfDay",
 	Callback = function(Option)
 		if Option == "Day" then
-			if lighting.ClockTime == 0 then
-				for i = 1, 96 do
-					game:GetService("Lighting").ClockTime -= 0.125
-					wait(0.0125)
-				end
-			end
+			game:GetService("Lighting").ClockTime -= 0
 		else
-			if lighting.ClockTime == 12 then
-				for i = 1, 96 do
-					game:GetService("Lighting").ClockTime += 0.125
-					wait(0.0125)
-				end
-			end
+			game:GetService("Lighting").ClockTime -= 12
 		end
 	end,
 })
@@ -190,21 +217,47 @@ local ESP = Render:CreateToggle({
 	Flag = "ESP",
 	Callback = function(Value)
 		if Value then
-			
-		end
-	end,
-})
+			local color = BrickColor.new(200, 100, 200)
+	local transparency = 0.8
 
-local ESPColor = Render:CreateToggle({
-	Name = "ESP Color",
-	CurrentValue = false,
-	Flag = "ESPColor",
-	Callback = function(Value)
-		if Value then
-			while true do
-				wait(0.1)
-				--ESPColor = color3
+	local Players = game:GetService("Players")
+
+	local function _ESP(c)
+		repeat wait() until c.PrimaryPart ~= nil
+		for i,p in pairs(c:GetChildren()) do
+			if p.ClassName == "Part" or p.ClassName == "MeshPart" then
+				if p:FindFirstChild("esp") then p.shit:Destroy() end
+				local a = Instance.new("BoxHandleAdornment",p)
+				a.Name = "esp"
+				a.Size = p.Size
+				a.Color = color
+				a.Transparency = transparency
+				a.AlwaysOnTop = true    
+				a.Visible = true    
+				a.Adornee = p
+				a.ZIndex = true    
 			end
+		end
+	end
+	
+	local function ESP()
+		for i,v in pairs(Players:GetChildren()) do
+			if v ~= game.Players.LocalPlayer then
+				if v.Character then
+					_ESP(v.Character)
+				end
+				v.CharacterAdded:Connect(function(chr)
+					_ESP(chr)
+				end)
+			end
+		end
+		Players.PlayerAdded:Connect(function(player)
+			player.CharacterAdded:Connect(function(chr)
+				_ESP(chr)
+			end)  
+		end)
+	end
+	ESP()
 		end
 	end,
 })
@@ -385,6 +438,24 @@ local AntiAfk = Misc:CreateToggle({
 		end
 	end,
 })
+				
+local MoonWalk = Misc:CreateToggle({
+	Name = "Moonwalk",
+	CurrentValue = false,
+	Flag = "Moonwalk"
+	Callback = function(Value)
+		repeat
+			local part = Instance.new("Part", Workspace)
+			part.Position = character.LeftFoot
+			part.size = Vector3.new(10, 10, 10)
+			part.Transparency = 1
+			part.Anchored = true
+			part.CanCollide = true
+			wait(2)
+			part:Destroy
+		until state == false
+	end,
+})
 
 -- Other Scripts
 
@@ -436,7 +507,3 @@ local CreditSection = Credits:CreateSection("Credits")
 local Scripting = Credits:CreateLabel("Scripting: !Bop#8928")
 local Testing = Credits:CreateLabel("Testing: !Bop#8928")
 local Skidding = Credits:CreateLabel("Skidding: !Bop#8928")
-local FlyScript = Credits:CreateLabel("Fly Script: Hoainhat")
-local ServerHop = Credits:CreateLabel("ServerHop Script: Coldster")
-local Rejoin = Credits:CreateLabel("Rejoin script: whathappened")
-local FakeLag = Credits:CreateLabel("Fake lag script: Eccentric")
