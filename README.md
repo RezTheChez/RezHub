@@ -37,11 +37,11 @@ Because we have:
 
 ## Discord UI:
 
-**Pros:** Very Reliable, Smooth UI, Looks like discord :), Notifications, and Destroy UI Buttons
+**Pros:** Very Reliable, Smooth UI, Looks like discord :), ESP Color Pickers, and Notifications
 
-**Cons:** No UI Customization, No Keybinds, and no Description of Modules
+**Cons:** No UI Customization, No Destroy UI Buttons, No Keybinds, and no Description of Modules
 
-```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
+```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubDiscord.lua"))```
 
 ## Community Suggestions
 
