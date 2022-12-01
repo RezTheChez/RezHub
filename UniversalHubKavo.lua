@@ -41,7 +41,7 @@ function getClosestPlayer()
 end
 
 game:GetService("Players").LocalPlayer.Character.Humanoid.Died:Connect(function()
-	wait(4)
+	wait(10)
 	player = game:GetService("Players").LocalPlayer
 	character = player.Character
 end)
@@ -358,7 +358,7 @@ MiscSection:NewSlider("Chat Spam Interval", "How long it takes between each chat
 	chatInterval = s
 end)
 
-MiscSection:NewButton("Chaos", "Slowly destroys your game", function()
+MiscSection:NewButton("Truss", "Spawns a truss for trolling", function()
 	local truss = Instance.new("TrussPart", game:GetService("Workspace"))
 	truss.Position = character.LeftFoot.Position
 	truss.Size = Vector3.new(2, 64, 2)
