@@ -49,7 +49,7 @@ If you have any suggestions for the script like modules or UI libraries you want
 
 ## UI Sections:
 
-**Player, Combat, Render, World, Misc, Other Scripts, and UI**
+**Player, Combat, Render, World, Misc, Other Scripts, UI, and Credits**
 
 ## Modules:
 
