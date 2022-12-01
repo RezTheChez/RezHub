@@ -6,7 +6,7 @@ Because we have:
 
 -- **Daily Updates**
 
--- **2 Different UI Libraries, with more coming soon**
+-- **3 Different UI Libraries, with more coming soon**
 
 -- **31 Working Features (Top universal script only has 14)**
 
@@ -20,7 +20,7 @@ Because we have:
 
 ## Kavo UI:
 
-**Pros:** Very Reliable, Full UI Customization, Esp Color Picker, and Toggleable UI With Custom Keybind
+**Pros:** Very Reliable, Full UI Customization, Esp Color Picker, Description of Modules, and Toggleable UI With Custom Keybind
 
 **Cons:** No destroy UI Button
 
@@ -30,7 +30,16 @@ Because we have:
 
 **Pros:** Very Reliable, Smooth UI, Section Icons, Smoother Sliders, Notifications, and Destroy UI Buttons
 
-**Cons:** No Esp Color Picker, No UI Customization, No Keybinds
+**Cons:** No Esp Color Picker, No UI Customization, No Keybinds, and no Description of Modules
+
+```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
+
+
+## Discord UI:
+
+**Pros:** Very Reliable, Smooth UI, Looks like discord :), Notifications, and Destroy UI Buttons
+
+**Cons:** No UI Customization, No Keybinds, and no Description of Modules
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubRayfield.lua"))```
 
