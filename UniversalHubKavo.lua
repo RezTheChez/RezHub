@@ -418,7 +418,7 @@ MiscSection:NewToggle("Moonwalk", "Do the moonwalk :)", function(state)
 			part.Anchored = true
 			part.CanCollide = true
 			wait(2)
-			part:Destroy
+			part:Destroy()
 		until state == false
 	end
 end)
