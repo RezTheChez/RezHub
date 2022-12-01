@@ -237,9 +237,9 @@ RenderSection:NewButton("ESP", "Gives you ESP", function()
 		repeat wait() until c.PrimaryPart ~= nil
 		for i,p in pairs(c:GetChildren()) do
 			if p.ClassName == "Part" or p.ClassName == "MeshPart" then
-				if p:FindFirstChild("shit") then p.shit:Destroy() end
+				if p:FindFirstChild("esp") then p.shit:Destroy() end
 				local a = Instance.new("BoxHandleAdornment",p)
-				a.Name = "shit"
+				a.Name = "esp"
 				a.Size = p.Size
 				a.Color = color
 				a.Transparency = transparency
@@ -464,7 +464,3 @@ local CreditSection = Credits:NewSection("Credits")
 CreditSection:NewLabel("Scripting: !Bop#8928")
 CreditSection:NewLabel("Testing: !Bop#8928")
 CreditSection:NewLabel("Skidding: !Bop#8928")
-CreditSection:NewLabel("Fly Script: Hoainhat")
-CreditSection:NewLabel("Serverhop Script: Coldster")
-CreditSection:NewLabel("Rejoin Script: whathappened")
-CreditSection:NewLabel("Fake Lag Script: Eccentric")
