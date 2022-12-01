@@ -1,7 +1,7 @@
--- Universal Hub V1.11
+-- Universal Hub V1.12
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("RezHub Universal Script V1.11", colors)
+local Window = Library.CreateLib("RezHub Universal Script V1.12", colors)
 
 local colors = {
 	SchemeColor = Color3.fromRGB(0,255,255),
