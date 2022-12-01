@@ -1,7 +1,7 @@
--- Universal Hub V1.11
+-- Universal Hub V1.12
 
 local DiscordLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/discord"))()
-local Window = DiscordLib:Window("RezHub Universal V1.11")
+local Window = DiscordLib:Window("RezHub Universal V1.12")
 local Server = Window:Server("RezHub", "http://www.roblox.com/asset/?id=11713222578")
 
 local player = game:GetService("Players").LocalPlayer
