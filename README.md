@@ -142,3 +142,5 @@ V1.09: Added Rejoin, Respawn, and Severhop to Misc Section
 v1.10: Added Other Scripts Section, Infinite Yield, CMD-X, Chat Bypasser, and Ultimate Trolling Gui
 
 V1.11: Added World section and Delete UI, Delete Workspace, and Toggle UI
+
+V1.12: Added Discord UI
