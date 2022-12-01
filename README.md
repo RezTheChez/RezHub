@@ -22,7 +22,7 @@ Because we have:
 
 **Pros:** Very Reliable, Full UI Customization, Esp Color Picker, Description of Modules, and Toggleable UI With Custom Keybind
 
-**Cons:** No destroy UI Button
+**Cons:** No destroy UI Button and No Notifications
 
 ```loadstring(game:HttpGet("https://raw.githubusercontent.com/RezTheChez/RezHub/main/UniversalHubKavo.lua"))```
 
