@@ -17,7 +17,7 @@ local UIS = game:GetService("UserInputService")
 local lighting = game:GetService("Lighting")
 
 local mouse = player:GetMouse()
-local chatMessage = "RezHub on top"
+local chatMessage = "RezHub On Top"
 local chatInterval = 1
 local fly = false
 local flySpeed = 60
