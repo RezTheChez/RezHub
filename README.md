@@ -1,4 +1,4 @@
- # RezHub
+# RezHub
 
 Why should you choose RezHub?
 
