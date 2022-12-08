@@ -51,6 +51,10 @@ If you have any suggestions for the script like modules or UI libraries you want
 
 **Player, Combat, Render, World, Misc, Other Scripts, UI, and Credits**
 
+## Coming Soon
+
+ - RezHub UI Just for RezHub
+
 ## Modules:
 
 [-- (Name of module), (Type of module), (Category module is in), (Module Description) --]
