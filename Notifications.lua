@@ -1,45 +1,58 @@
--- Gui to Lua
--- Version: 3.2
+if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rez Notifications") then
+	local Main = Instance.new("ScreenGui")
+	local Popups = Instance.new("Frame")
+	local UIListLayout = Instance.new("UIListLayout")
 
--- Instances:
+	Main.Name = "Rez Notifications"
+	Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local Main = Instance.new("ScreenGui")
-local Popups = Instance.new("Frame")
-local UIListLayout = Instance.new("UIListLayout")
+	Popups.Name = "Popups"
+	Popups.Parent = Main
+	Popups.AnchorPoint = Vector2.new(1, 1)
+	Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Popups.BackgroundTransparency = 1.000
+	Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
+	Popups.Size = UDim2.new(0, 320, 0, 567)
 
---Properties:
-
-Main.Name = "Main"
-Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-Popups.Name = "Popups"
-Popups.Parent = Main
-Popups.AnchorPoint = Vector2.new(1, 1)
-Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Popups.BackgroundTransparency = 1.000
-Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
-Popups.Size = UDim2.new(0, 320, 0, 567)
-
-UIListLayout.Parent = Popups
-UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-UIListLayout.Padding = UDim.new(0, 10)
+	UIListLayout.Parent = Popups
+	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+	UIListLayout.Padding = UDim.new(0, 10)
+end
 
 function notify(name, textColor)
-	local notification = Instance.new("TextLabel")
+	local notification = Instance.new("Frame")
+	local top = Instance.new("Frame")
+	local close = Instance.new("TextButton")
 	local text = Instance.new("TextLabel")
-	local TextButton = Instance.new("TextButton")
+	local title = Instance.new("TextLabel")
 
 	notification.Name = "notification"
 	notification.Parent = Popups
-	notification.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	notification.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
 	notification.BorderSizePixel = 0
-	notification.Size = UDim2.new(0, 250, 0, 75)
-	notification.Font = Enum.Font.SourceSans
-	notification.Text = ""
-	notification.TextColor3 = Color3.fromRGB(0, 0, 0)
-	notification.TextSize = 14.000
+	notification.Size = UDim2.new(0, 250, 0, 110)
+
+	top.Name = "top"
+	top.Parent = notification
+	top.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	top.BorderSizePixel = 0
+	top.Size = UDim2.new(1, 0, 0, 20)
+
+	close.Name = "close"
+	close.Parent = notification
+	close.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+	close.BackgroundTransparency = 1.000
+	close.Position = UDim2.new(0.920000017, 0, 0.0399999991, 0)
+	close.Size = UDim2.new(0, 15, 0, 15)
+	close.ZIndex = 2
+	close.Font = Enum.Font.Ubuntu
+	close.Text = "X"
+	close.TextColor3 = Color3.fromRGB(204, 204, 204)
+	close.TextScaled = true
+	close.TextSize = 14.000
+	close.TextWrapped = true
 
 	text.Name = "text"
 	text.Parent = notification
@@ -47,7 +60,8 @@ function notify(name, textColor)
 	text.BackgroundTransparency = 1.000
 	text.BorderColor3 = Color3.fromRGB(27, 42, 53)
 	text.BorderSizePixel = 0
-	text.Size = UDim2.new(0, 250, 0, 75)
+	text.Position = UDim2.new(0, 0, 0, 20)
+	text.Size = UDim2.new(0, 250, 0, 90)
 	text.ZIndex = 2
 	text.Font = Enum.Font.Ubuntu
 	text.Text = name
@@ -55,19 +69,25 @@ function notify(name, textColor)
 	text.TextSize = 30.000
 	text.TextWrapped = true
 
-	TextButton.Parent = notification
-	TextButton.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
-	TextButton.BackgroundTransparency = 1.000
-	TextButton.Position = UDim2.new(0.889999986, 0, 0.0500000007, 0)
-	TextButton.Size = UDim2.new(0, 25, 0, 25)
-	TextButton.Font = Enum.Font.Ubuntu
-	TextButton.Text = "X"
-	TextButton.TextColor3 = Color3.fromRGB(204, 204, 204)
-	TextButton.TextScaled = true
-	TextButton.TextSize = 14.000
-	TextButton.TextWrapped = true
+	title.Name = "title"
+	title.Parent = notification
+	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundTransparency = 1.000
+	title.Size = UDim2.new(0.899999976, 0, 0, 20)
+	title.Font = Enum.Font.Ubuntu
+	title.Text = "  RezHub | Pet Sim X"
+	title.TextColor3 = Color3.fromRGB(235, 235, 235)
+	title.TextSize = 14.000
+	title.TextWrapped = true
+	title.TextXAlignment = Enum.TextXAlignment.Left
 
-	TextButton.MouseButton1Click:Connect(function()
+	close.MouseButton1Click:Connect(function()
 		notification:Destroy()
 	end)
 end
+
+notify("Test 1", Color3.fromRGB(255, 255, 255))
+
+wait(3)
+
+notify("This Text Is Green", Color3.fromRGB(255, 255, 255))
