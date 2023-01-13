@@ -1,4 +1,3 @@
-if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rez Notifications") then
 	local Main = Instance.new("ScreenGui")
 	local Popups = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
@@ -19,7 +18,6 @@ if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Rez Noti
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
 	UIListLayout.Padding = UDim.new(0, 10)
-end
 
 function notify(name, textColor)
 	local notification = Instance.new("Frame")
@@ -90,4 +88,4 @@ notify("Test 1", Color3.fromRGB(255, 255, 255))
 
 wait(3)
 
-notify("This Text Is Green", Color3.fromRGB(255, 255, 255))
+notify("This Text Is Green", Color3.fromRGB(0, 255, 0))
