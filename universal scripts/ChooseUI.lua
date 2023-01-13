@@ -58,19 +58,49 @@ text.Size = UDim2.new(0, 400, 0, 60)
 text.ZIndex = 2
 text.Font = Enum.Font.Ubuntu
 text.Text = "Choose Script UI"
-teYS$
-%248k> == 255 or rayfieldH == false
+
+-- Rayfield Button
+
+rayfield.Name = "text"
+rayfield.Parent = notification
+rayfield.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+rayfield.BorderSizePixel = 0
+rayfield.Position = UDim2.new(0.2, 0, 0, 100)
+rayfield.Size = UDim2.new(0.2, 0, 0, 60)
+rayfield.ZIndex = 2
+rayfield.Font = Enum.Font.Ubuntu
+rayfield.Text = "Rayfield"
+
+
+kavo.Name = "Kavo"
+kavo.Parent = notification
+kavo.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+kavo.BorderSizePixel = 0
+kavo.Position = UDim2.new(0.5, 0, 0, 100)
+kavo.Size = UDim2.new(0.2, 0, 0, 60)
+kavo.ZIndex = 2
+kavo.Font = Enum.Font.Ubuntu
+kavo.Text = "Kavo"
+
+rayfield.MouseEnter:Connect(function()
+    rayfieldH = true
+    if rayfieldC < 255 then
+      repeat 
+        wait(0.02)
+        rayfieldC += 5
+        rayfield.TextColor3 = Color3.fromRGB(rayfieldC, rayfieldC, rayfieldC)
+      until rayfieldC == 255 or rayfieldH == false
     end
 end)
 
-rayfeild.MouseLeave:Connect(function()
-    closeH = false
-    if closeC > 150 then
+rayfield.MouseLeave:Connect(function()
+    rayfieldH = false
+    if rayfieldC > 150 then
       repeat 
         wait(0.02)
-        closeC -= 5
-        close.TextColor3 = Color3.fromRGB(closeC, closeC, closeC)
-      until closeC == 150 or closeH == true
+        rayfieldC -= 5
+        rayfield.TextColor3 = Color3.fromRGB(rayfieldC, rayfieldC, rayfieldC)
+      until rayfieldC == 150 or rayfieldH == true
     end
 end)
 
