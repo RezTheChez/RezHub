@@ -3,7 +3,7 @@ local NotifyTemplate = script:WaitForChild("newNotify")
 
 function module:NotifyPlayer(player, text)
 	local PlayerGui = player:WaitForChild("PlayerGui")
-	local NotificationsGui = PlayerGui.Main:WaitForChild("Popups")
+	local NotificationsGui = PlayerGui:WaitForChild("Popups")
 	
 	local newNotify = Instance.new("TextLabel")
 	newNotify.Name = "newNotify"
