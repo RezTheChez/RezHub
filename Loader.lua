@@ -36,7 +36,7 @@ function LoadScript()
         task.wait(1.5)
         Network:NotifyPrompt("Universal", "Would you like to load the universal script?", 30, function(Value)
             if Value then
-                loadstring(game:HttpGet(string.format("%s%s", Client.Github, "UniversalHubRayfield.lua")))()
+                loadstring(game:HttpGet(string.format("%s%s", Client.Github, "Universal.lua")))()
             end
         end)
     end
