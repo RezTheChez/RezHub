@@ -139,6 +139,8 @@ function lib:Window(text, preset, closebind)
     Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 
     MakeDraggable(DragFrame, Main)
+	
+	print("Window Initiated")
 
     local uitoggled = false
     UserInputService.InputBegan:Connect(
@@ -172,6 +174,7 @@ function lib:Window(text, preset, closebind)
     end
 
     function lib:Notification(titleText, name, textColor)
+		print("Notified")
 			if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications") then
 				game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications"):Destroy()
 			end
@@ -435,6 +438,7 @@ function lib:Window(text, preset, closebind)
             )
 
             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
+	print("Tabs Loaded
         end
         function tabcontent:Toggle(text,default, callback)
             local toggled = false
