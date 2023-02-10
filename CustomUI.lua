@@ -172,32 +172,36 @@ function lib:Window(text, preset, closebind)
     end
 
     function lib:Notification(titleText, name, textColor)
-        Main = Instance.new("ScreenGui")
-        Popups = Instance.new("Frame")
-        UIListLayout = Instance.new("UIListLayout")
+			if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications") then
+				game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications"):Destroy()
+			end
+		
+			local Main = Instance.new("ScreenGui")
+			local Popups = Instance.new("Frame")
+			local UIListLayout = Instance.new("UIListLayout")
 
-        --Properties:
+			--Properties:
 
-        Main.Name = "V4peNotifications"
-        Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+			Main.Name = "V4peNotifications"
+			Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-        Popups.Name = "Popups"
-        Popups.Parent = Main
-        Popups.AnchorPoint = Vector2.new(1, 1)
-        Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        Popups.BackgroundTransparency = 1.000
-        Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
-        Popups.Size = UDim2.new(0, 320, 0, 567)
+			Popups.Name = "Popups"
+			Popups.Parent = Main
+			Popups.AnchorPoint = Vector2.new(1, 1)
+			Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Popups.BackgroundTransparency = 1.000
+			Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
+			Popups.Size = UDim2.new(0, 320, 0, 567)
 
-        UIListLayout.Parent = Popups
-        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-        UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-        UIListLayout.Padding = UDim.new(0, 10)
-    
-      local notification = Instance.new("Frame")
-      local top = Instance.new("Frame")
-      local close = Instance.new("TextButton")
+			UIListLayout.Parent = Popups
+			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+			UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+			UIListLayout.Padding = UDim.new(0, 10)
+		
+			local notification = Instance.new("Frame")
+			local top = Instance.new("Frame")
+			local close = Instance.new("TextButton")
 			local text = Instance.new("TextLabel")
 			local title = Instance.new("TextLabel")
 
@@ -249,7 +253,7 @@ function lib:Window(text, preset, closebind)
 			title.BackgroundTransparency = 1.000
 			title.Size = UDim2.new(0.899999976, 0, 0, 20)
 			title.Font = Enum.Font.Ubuntu
-			title.Text = titleText
+			title.Text = "  RezHub | Pet Sim X"
 			title.TextColor3 = Color3.fromRGB(235, 235, 235)
 			title.TextSize = 14.000
 			title.TextWrapped = true
@@ -258,6 +262,7 @@ function lib:Window(text, preset, closebind)
 			close.MouseButton1Click:Connect(function()
 				notification:Destroy()
 			end)
+		end
     end
   
     local tabhold = {}
