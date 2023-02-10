@@ -139,8 +139,6 @@ function lib:Window(text, preset, closebind)
     Main:TweenSize(UDim2.new(0, 560, 0, 319), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 
     MakeDraggable(DragFrame, Main)
-	
-	print("Window Initiated")
 
     local uitoggled = false
     UserInputService.InputBegan:Connect(
@@ -174,35 +172,40 @@ function lib:Window(text, preset, closebind)
     end
 
     function lib:Notification(titleText, name, textColor)
-		print("Notified")
-			if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications") then
-				game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications"):Destroy()
-			end
-		
-			local Main = Instance.new("ScreenGui")
-			local Popups = Instance.new("Frame")
-			local UIListLayout = Instance.new("UIListLayout")
+      local Main = nil
+      local Popups = nil
+      local UIListLayout = nil
 
-			--Properties:
+      if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications") then
+        Main = Instance.new("ScreenGui")
+        Popups = Instance.new("Frame")
+        UIListLayout = Instance.new("UIListLayout")
 
-			Main.Name = "V4peNotifications"
-			Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        --Properties:
 
-			Popups.Name = "Popups"
-			Popups.Parent = Main
-			Popups.AnchorPoint = Vector2.new(1, 1)
-			Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			Popups.BackgroundTransparency = 1.000
-			Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
-			Popups.Size = UDim2.new(0, 320, 0, 567)
+        Main.Name = "V4peNotifications"
+        Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-			UIListLayout.Parent = Popups
-			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
-			UIListLayout.Padding = UDim.new(0, 10)
-		
-			local notification = Instance.new("Frame")
+        Popups.Name = "Popups"
+        Popups.Parent = Main
+        Popups.AnchorPoint = Vector2.new(1, 1)
+        Popups.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Popups.BackgroundTransparency = 1.000
+        Popups.Position = UDim2.new(0.98989898, 0, 0.991729081, 0)
+        Popups.Size = UDim2.new(0, 320, 0, 567)
+
+        UIListLayout.Parent = Popups
+        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+        UIListLayout.Padding = UDim.new(0, 10)
+      else
+        local Main = game.Players.LocalPlayer:WaitForChild("PlayerGui").V4peNotifications
+        local Popups = Main.Popups
+        local UIListLayout = Popups.UIListLayout
+      end
+
+      local notification = Instance.new("Frame")
 			local top = Instance.new("Frame")
 			local close = Instance.new("TextButton")
 			local text = Instance.new("TextLabel")
@@ -256,7 +259,7 @@ function lib:Window(text, preset, closebind)
 			title.BackgroundTransparency = 1.000
 			title.Size = UDim2.new(0.899999976, 0, 0, 20)
 			title.Font = Enum.Font.Ubuntu
-			title.Text = "  RezHub | Pet Sim X"
+			title.Text = titleText
 			title.TextColor3 = Color3.fromRGB(235, 235, 235)
 			title.TextSize = 14.000
 			title.TextWrapped = true
@@ -265,9 +268,8 @@ function lib:Window(text, preset, closebind)
 			close.MouseButton1Click:Connect(function()
 				notification:Destroy()
 			end)
-		end
     end
-  
+
     local tabhold = {}
     function tabhold:Tab(text)
         local TabBtn = Instance.new("TextButton")
@@ -438,7 +440,6 @@ function lib:Window(text, preset, closebind)
             )
 
             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
-	print("Tabs Loaded
         end
         function tabcontent:Toggle(text,default, callback)
             local toggled = false
@@ -1596,5 +1597,3 @@ function lib:Window(text, preset, closebind)
     return tabhold
 end
 return lib
-
-print("RezHub Lib Loaded in "..math.random(0.0000000000001, 0.0090000000000).." seconds!")
