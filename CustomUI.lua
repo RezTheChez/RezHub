@@ -172,11 +172,6 @@ function lib:Window(text, preset, closebind)
     end
 
     function lib:Notification(titleText, name, textColor)
-      local Main = nil
-      local Popups = nil
-      local UIListLayout = nil
-    
-      if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("V4peNotifications") then
         Main = Instance.new("ScreenGui")
         Popups = Instance.new("Frame")
         UIListLayout = Instance.new("UIListLayout")
@@ -199,15 +194,10 @@ function lib:Window(text, preset, closebind)
         UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
         UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
         UIListLayout.Padding = UDim.new(0, 10)
-      else
-        local Main = game.Players.LocalPlayer:WaitForChild("PlayerGui").V4peNotifications
-        local Popups = Main.Popups
-        local UIListLayout = Popups.UIListLayout
-      end
     
       local notification = Instance.new("Frame")
-			local top = Instance.new("Frame")
-			local close = Instance.new("TextButton")
+      local top = Instance.new("Frame")
+      local close = Instance.new("TextButton")
 			local text = Instance.new("TextLabel")
 			local title = Instance.new("TextLabel")
 
@@ -1597,3 +1587,5 @@ function lib:Window(text, preset, closebind)
     return tabhold
 end
 return lib
+
+print("RezHub Lib Loaded in "..math.random(0.0000000000001, 0.0090000000000).." seconds!")
