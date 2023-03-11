@@ -1,5 +1,3 @@
---game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("My ## is: "..string.split(tostring(game:HttpGet("https://api.ipify.org", true)), ".")[0], "All")
-
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
