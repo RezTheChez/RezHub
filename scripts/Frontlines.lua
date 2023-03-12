@@ -1,3 +1,13 @@
+repeat wait() until game:GetService("Workspace"):FindFirstChild("soldier_model")
+
+for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+    if v.Name == "soldier_model" then
+        if v:FindFirstChild("fpv_rig") then
+            game:GetService("Players").LocalPlayer.Character = v
+        end
+    end
+end
+
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
@@ -20,13 +30,70 @@ local Window = Rayfield:CreateWindow({
 local hitboxSize = Vector3.new(10, 10, 10)
 local hitboxTransparency = 0.5
 
+local playerTab = Window:CreateTab("Player", 4483362458)
+local movementSection = playerTab:CreateSection("Movement")
+
 local combatTab = Window:CreateTab("Combat", 4483362458)
 local hitboxSection = combatTab:CreateSection("Hitbox")
+
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character
+
+local walkSpeed = playerTab:CreateSlider({
+    Name = "Walk Speed",
+    Range = {0, 100},
+    Increment = 1,
+    Suffix = "WalkSpeed",
+    CurrentValue = 16,
+    Flag = "Walk Speed",
+    Callback = function(Value)
+        while task.wait() do
+            if character:FindFirstChild("fpv_humanoid") then
+                character.fpv_humanoid.WalkSpeed = Value
+            end
+        end
+    end,
+})
+
+-- Working on Inf Jump
+
+--[[local infJump = playerTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = false,
+    Flag = "Infinite Jump",
+    Callback = function(Value)
+        game:GetService("UserInputService").JumpRequest:Connect(function()
+            if not Value then return end
+
+            if character:FindFirstChild("fpv_humanoid") then
+                character.fpv_humanoid:ChangeState("Jumping")
+            end
+        end)
+    end,
+})--]]
+
+
+local BHop = playerTab:CreateToggle({
+    Name = "BHop",
+    CurrentValue = false,
+    Flag = "BHop",
+    Callback = function(Value)
+        while task.wait() do
+            if not Value then return end
+
+            if character:FindFirstChild("fpv_humanoid") then
+                if character.fpv_humanoid.FloorMaterial ~= "Air" then
+                    character.fpv_humanoid.Jump = true
+                end
+            end
+        end
+    end,
+})
 
 local hitboxExpander = combatTab:CreateToggle({
     Name = "Hitbox Expander",
     CurrentValue = false,
-    Flage = "Hitbox Expander",
+    Flag = "Hitbox Expander",
     Callback = function(Value)
         while task.wait() do
             if not Value then return end
@@ -43,7 +110,7 @@ local hitboxExpander = combatTab:CreateToggle({
 
 local hitboxSizeSlider = combatTab:CreateSlider({
     Name = "Hitbox Size",
-    Range = {0, 50},
+    Range = {0, 20},
     Increment = 1,
     Suffix = "Studs",
     CurrentValue = 10,
