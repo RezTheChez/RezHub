@@ -27,11 +27,31 @@ local Window = Rayfield:CreateWindow({
     KeySystem = false,
  })
 
+function addCham(color, fillTransparency, borderTransparency, parent)
+   local cham = Instance.new("Highlight", v)
+   cham.FillColor = color
+   cham.FillTransparency = fillTransparency
+end
+
+function deleteAllChams()
+   
+end
+
+-- Chams
+local chamsEnemyFillColor = Color3.fromRGB(255, 0, 0)
+local chamsTeamFillColor = Color3.fromRGB(0, 0, 255)
+local chamsFillTransparency= 0.5
+local chamsOutlineTransparency = 0
+
+-- Hitbox Extender
 local hitboxSize = Vector3.new(10, 10, 10)
 local hitboxTransparency = 0.5
 
 local playerTab = Window:CreateTab("Player", 4483362458)
 local movementSection = playerTab:CreateSection("Movement")
+
+local visualsTab = Window:CreateTab("Visuals", 4483362458)
+local chamsSection = visualsTab:CreateSection("Chams")
 
 local combatTab = Window:CreateTab("Combat", 4483362458)
 local hitboxSection = combatTab:CreateSection("Hitbox")
@@ -86,6 +106,27 @@ local BHop = playerTab:CreateToggle({
                     character.fpv_humanoid.Jump = true
                 end
             end
+        end
+    end,
+})
+
+local chams = visualsTab:CreateToggle({
+    Name = "Chams",
+    CurrentValue = false,
+    Flag = "Chams",
+    Callback = function(Value)
+        if ws.solider_model:FindFirstChild("Chams") then
+           for i, v in pairs(ws:GetChildren()) do
+              if v.Name == "soldier_model" then
+                 v.Chams:Destroy()
+              end
+           end
+        else
+           if ws.solider_model:FindFirstChild("Chams") then
+              for i, v in pairs(ws:GetChildren()) do
+                 if v.Name == "soldier_model" then
+                    local Chams = Instance.new("Highlight", v)
+                    Chams
         end
     end,
 })
