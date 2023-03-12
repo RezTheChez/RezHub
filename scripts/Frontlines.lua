@@ -28,19 +28,26 @@ local Window = Rayfield:CreateWindow({
  })
 
 function addCham(color, fillTransparency, borderTransparency, parent)
-   local cham = Instance.new("Highlight", v)
+   local cham = Instance.new("Highlight", parent)
    cham.FillColor = color
    cham.FillTransparency = fillTransparency
+   cham.OutlineTransparency = borderTransparency
 end
 
-function deleteAllChams()
-   
+function clearAllChams(ws)
+   for i, v in pairs(ws:GetChildren()) do
+       if v.Name == "soldier_model" then
+           if v:FindFirstChild("Highlight") then
+               v.Highlight:Destroy()
+           end
+       end
+   end
 end
 
 -- Chams
-local chamsEnemyFillColor = Color3.fromRGB(255, 0, 0)
-local chamsTeamFillColor = Color3.fromRGB(0, 0, 255)
-local chamsFillTransparency= 0.5
+local chamsEnemyColor = Color3.fromRGB(255, 0, 0)
+local chamsTeamColor = Color3.fromRGB(0, 0, 255)
+local chamsFillTransparency = 0.5
 local chamsOutlineTransparency = 0
 
 -- Hitbox Extender
@@ -92,14 +99,31 @@ local walkSpeed = playerTab:CreateSlider({
     end,
 })--]]
 
+local noClip = playerTab:CreateToggle({
+    Name = "NoClip",
+    CurrentValue = false,
+    Flag = "NoClip",
+    Callback = function(Value)
+        while task.wait() do
+            if not Value then break end
+            
+            for i, v in pairs(ws.soldier_mode:GetDescendants()) do
+    if v:IsA("BasePart") then
+    v.CanCollide = false
+    end
+       end
+    end
+    end
+})
 
-local BHop = playerTab:CreateToggle({
+
+local bHop = playerTab:CreateToggle({
     Name = "BHop",
     CurrentValue = false,
     Flag = "BHop",
     Callback = function(Value)
         while task.wait() do
-            if not Value then return end
+            if not Value then break end
 
             if character:FindFirstChild("fpv_humanoid") then
                 if character.fpv_humanoid.FloorMaterial ~= "Air" then
@@ -115,19 +139,58 @@ local chams = visualsTab:CreateToggle({
     CurrentValue = false,
     Flag = "Chams",
     Callback = function(Value)
-        if ws.solider_model:FindFirstChild("Chams") then
-           for i, v in pairs(ws:GetChildren()) do
-              if v.Name == "soldier_model" then
-                 v.Chams:Destroy()
-              end
-           end
-        else
-           if ws.solider_model:FindFirstChild("Chams") then
-              for i, v in pairs(ws:GetChildren()) do
-                 if v.Name == "soldier_model" then
-                    local Chams = Instance.new("Highlight", v)
-                    Chams
+        while task.wait() do
+            clearAllChams(ws)
+            if not Value then break end
+            
+            for i, v in pairs(ws:GetChildren()) do
+                if v.Name == "soldier_model" then
+                    addCham(chamsEnemyColor, chamsFillTransparency, chamsBorderTransparency, v)
+                end
+            end
         end
+    end,
+})
+
+local chamsEnemyColor = visualsTab:CreateColorPicker({
+    Name = "Chams Enemy Color",
+    Color = Color3.fromRGB(255, 0, 0),
+    Flag = "Enemy Color",
+    Callback = function(Value)
+        chamsEnemyColor = Value
+    end,
+})
+
+local chamsTeamColor = visualsTab:CreateColorPicker({
+    Name = "Chams Team Color",
+    Color = Color3.fromRGB(0, 0, 0),
+    Flag = "Chams Team Color",
+    Callback = function(Value)
+        chamsTeamColor = Value
+    end,
+})
+
+local chamsFillTransparency = visualsTab:CreateSlider({
+    Name = "Chams Fill Transparency",
+    Range = {0, 1},
+    Increment = 0.1,
+    Suffix = "Fill Transparency",
+    CurrentValue = 0.5,
+    Flag = "Chams Fill Transparency",
+    Callback = function(Value)
+        chamsFillTransparency = Value
+    end,
+})
+
+local chamsBorderTransparency = visualsTab:CreateSlider({
+    Name = "Chams Border Transparency",
+    Range = {0, 1},
+    Increment = 0.1,
+    Suffix = "Border Transparency",
+    CurrentValue = 0.5,
+    Flag = "Chams Border Transparency",
+    Callback = function(Value)
+        chamsBorderTransparency = Value
     end,
 })
 
@@ -137,12 +200,12 @@ local hitboxExpander = combatTab:CreateToggle({
     Flag = "Hitbox Expander",
     Callback = function(Value)
         while task.wait() do
-            if not Value then return end
+            if not Value then break end
 
             for _,v in pairs(game:GetService("Workspace"):GetChildren()) do
                 if v:IsA("BasePart") and v.Color == Color3.new(1,0,0) then
-                v.Transparency = hitboxTransparency
-                v.Size = hitboxSize
+                    v.Transparency = hitboxTransparency
+                    v.Size = hitboxSize
                 end
             end
         end
