@@ -472,7 +472,7 @@ local chams = visualsTab:CreateToggle({
 })
 
 local chamsEnemyColor = visualsTab:CreateColorPicker({
-    Name = "Chams Enemy Color",
+    Name = "Chams Color",
     Color = Color3.fromRGB(255, 0, 0),
     Flag = "Enemy Color",
     Callback = function(Value)
@@ -506,7 +506,7 @@ local chamsBorderTransparency = visualsTab:CreateSlider({
 
 local miscSection = visualsTab:CreateSection("Misc")
 
-local thirdPerson = visualsTab:CreateToggle({
+--[[local thirdPerson = visualsTab:CreateToggle({
     Name = "Third Person View",
     CurrentValue = false,
     Flag = "Third Person View",
@@ -529,7 +529,7 @@ local thirdPerson = visualsTab:CreateToggle({
             ws.Camera.CameraSubject = thirdPersonPart
         end
     end,
-})
+})--]]
 
 local dayAndNight = visualsTab:CreateToggle({
     Name = "Toggle Day/Night",
