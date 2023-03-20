@@ -621,19 +621,25 @@ local fovEnabled = combatTab:CreateToggle({
         if Drawing then
             if not drawingCreated then
                 while task.wait() do
-                    if prevCircle ~= nil then
-                        prevCircle:Remove()
+                    if Value then
+                        if prevCircle ~= nil then
+                            prevCircle:Remove()
+                        end
+    
+                        prevCircle = Drawing.new("Circle")
+                        prevCircle.Transparency = 1
+                        prevCircle.Visible = true
+                        prevCircle.Thickness = 2
+                        prevCircle.Color = fovColor
+                        prevCircle.NumSides = 20
+                        prevCircle.Radius = silentAimSize
+                        prevCircle.Filled = false
+                        prevCircle.Position = Vector2.new(ws.CurrentCamera.ViewportSize.X / 2, ws.CurrentCamera.ViewportSize.Y / 2)
+                    else
+                        if prevCircle ~= nil then
+                            prevCircle:Remove()
+                        end
                     end
-
-                    prevCircle = Drawing.new("Circle")
-                    prevCircle.Transparency = 1
-                    prevCircle.Visible = true
-                    prevCircle.Thickness = 2
-                    prevCircle.Color = fovColor
-                    prevCircle.NumSides = 20
-                    prevCircle.Radius = silentAimSize
-                    prevCircle.Filled = false
-                    prevCircle.Position = Vector2.new(ws.CurrentCamera.ViewportSize.X / 2, ws.CurrentCamera.ViewportSize.Y / 2)
                 end
             end
         else
