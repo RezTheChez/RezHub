@@ -850,10 +850,16 @@ local start = tick()
 game:GetService("ReplicatedStorage").frontlines_assets.r15_rig.RemoteEvent:FireServer()
 local Ping = statsTab:CreateLabel("Ping: "..(math.floor(((tick() - start) + 1) * 1000000)) - 1000000)
 
+local sessionSection = statsTab:CreateSection("Session")
+
+local sessionTimeLabel = statsTab:CreateLabel("Session Time With Sirius: "..math.floor(sessionTime).."s")
+
 while wait(0.1) do
     FPS:Set("FPS: "..ws:GetRealPhysicsFPS())
 
     local start = tick()
     game:GetService("ReplicatedStorage").frontlines_assets.r15_rig.RemoteEvent:FireServer()
     Ping:Set("Ping: "..(math.floor(((tick() - start) + 1) * 1000000)) - 1000000)
+    sessionTimeLabel:Set("Session Time With Sirius: "..math.floor(sessionTime).."s")
+    sessionTime += 0.1
 end
