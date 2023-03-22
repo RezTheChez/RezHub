@@ -185,6 +185,9 @@ local prevCircle = nil
 -- Notifications
 local rayfieldNotificationsEnabled = true
 
+-- Session
+local sessionTime = 0
+
 -- Normal Variables
 local ws = game:GetService("Workspace")
 local runService = game:GetService("RunService")
