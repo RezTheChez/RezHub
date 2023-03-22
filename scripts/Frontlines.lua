@@ -1,3 +1,5 @@
+repeat wait() until game:GetService("Workspace"):FindFirstChild("soldier_model")
+
 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
     if v.Name == "soldier_model" then
         if v:FindFirstChild("fpv_humanoid") then
