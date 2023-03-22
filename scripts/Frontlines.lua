@@ -1,6 +1,6 @@
 for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
     if v.Name == "soldier_model" then
-        if v:FindFirstChild("fpv_rig") then
+        if v:FindFirstChild("fpv_humanoid") then
             game:GetService("Players").LocalPlayer.Character = v
         end
     end
@@ -596,7 +596,7 @@ local silentAim = combatTab:CreateToggle({
     Callback = function(Value)
         if Value then
             for i, v in pairs(ws:GetChildren()) do
-                if v.Name == "soldier_model" and not v:FindFirstChild("fpv_rig") then
+                if v.Name == "soldier_model" and not v:FindFirstChild("fpv_humanoid") then
                     v.HumanoidRootPart.Size = Vector3.new(silentAimSize / 20, silentAimSize / 20, silentAimSize / 20)
                 end
             end
@@ -864,5 +864,5 @@ while wait(0.1) do
     game:GetService("ReplicatedStorage").frontlines_assets.r15_rig.RemoteEvent:FireServer()
     Ping:Set("Ping: "..(math.floor(((tick() - start) + 1) * 1000000)) - 1000000)
     sessionTimeLabel:Set("Session Time With Sirius: "..math.floor(sessionTime).."s")
-    sessionTime += 0.1
+    sessionTime +=  0.1 -- Synapse says there is an error here, but it is wrong
 end
