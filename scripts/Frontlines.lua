@@ -11,13 +11,13 @@ end
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Roblox Frontlines Script",
-    LoadingTitle = "Roblox Frontlines Script",
-    LoadingSubtitle = "by !Bop#8928",
+    Name = "Frontlines",
+    LoadingTitle = "Frontlines",
+    LoadingSubtitle = "by Sirius",
     ConfigurationSaving = {
        Enabled = false,
        FolderName = nil,
-       FileName = "Roblox Frontlines Script"
+       FileName = "Frontlines"
     },
     Discord = {
        Enabled = true,
@@ -183,12 +183,11 @@ local fovSize = 50
 local drawingCreated = false
 local fovColor = Color3.fromRGB(0, 255, 0)
 local prevCircle = nil
+local silentAimOn = false
 
 -- Notifications
 local rayfieldNotificationsEnabled = true
-
--- Session
-local sessionTime = 0
+local fovNotificationDebounce = false
 
 -- Normal Variables
 local ws = game:GetService("Workspace")
@@ -196,23 +195,20 @@ local runService = game:GetService("RunService")
 local player = game:GetService("Players").LocalPlayer
 local character = player.Character
 
-local playerTab = Window:CreateTab("Player", 4483362458)
+local playerTab = Window:CreateTab("Player", 12867775048)
 local movementSection = playerTab:CreateSection("Movement")
 
-local visualsTab = Window:CreateTab("Visuals", 4483362458)
+local visualsTab = Window:CreateTab("Visuals", 12867775168)
 local chamsSection = visualsTab:CreateSection("Chams")
 
-local combatTab = Window:CreateTab("Combat", 4483362458)
+local combatTab = Window:CreateTab("Combat", 12867775250)
 local silentAimSection = combatTab:CreateSection("Silent Aim - SYNAPSE X ONLY")
 
-local miscTab = Window:CreateTab("Misc", 4483362458)
+local miscTab = Window:CreateTab("Misc", 12867775396)
 local serverhopSection = miscTab:CreateSection("Serverhop/Rejoin")
 
-local settingsTab = Window:CreateTab("Settings/Credits", 4483362458)
+local settingsTab = Window:CreateTab("Settings/Credits", 12867775106)
 local chatSection = settingsTab:CreateSection("Settings")
-
-local statsTab = Window:CreateTab("Game Stats", 4483362458)
-local performanceSection = statsTab:CreateSection("Performance")
 
 local note = playerTab:CreateLabel("Note: You must have spawned into the game for most of these modules to work.")
 
@@ -509,6 +505,69 @@ local chamsBorderTransparency = visualsTab:CreateSlider({
     end,
 })
 
+local fovSection = visualsTab:CreateSection("Silent Aim FOV - SYNAPSE X ONLY")
+
+local fovEnabled = visualsTab:CreateToggle({
+    Name = "Silent Aim Fov Enabled",
+    CurrentValue = false,
+    Flag = "Fov Enabled",
+    Callback = function(Value)
+        if Drawing then
+            while task.wait() do
+                if Value then
+                    if prevCircle ~= nil then
+                        prevCircle.Transparency = 0
+                    end
+
+                    if silentAimOn then
+                        prevCircle = Drawing.new("Circle")
+                        prevCircle.Transparency = 1
+                        prevCircle.Visible = true
+                        prevCircle.Thickness = 2
+                        prevCircle.Color = fovColor
+                        prevCircle.NumSides = 20
+                        prevCircle.Radius = silentAimSize
+                        prevCircle.Filled = false
+                        prevCircle.Position = Vector2.new(player:GetMouse().X, player:GetMouse().Y)
+                    end
+                else
+                    prevCircle.Transparency = 0
+                end
+            end
+        else
+            if rayfieldNotificationsEnabled then
+                if not fovNotificationDebounce then
+                    fovNotificationDebounce = true
+                    Rayfield:Notify({
+                        Title = "Not using Synapse",
+                        Content = "You must be using Synapse X.",
+                        Duration = 6.5,
+                        Image = 4483362458,
+                        Actions = {
+                        Accept = {
+                            Name = "Okay!",
+                            Callback = function() return end
+                            },
+                        },
+                    })
+
+                    wait(3)
+                    fovNotificationDebounce = false
+                end
+            end
+        end
+    end,
+})
+
+local fovColorpicker = visualsTab:CreateColorPicker({
+    Name = "Silent Aim FOV Color Picker",
+    Color = Color3.fromRGB(0, 255, 0),
+    Flag = "FOV Color Picker",
+    Callback = function(Value)
+        fovColor = Value
+    end,
+})
+
 local miscSection = visualsTab:CreateSection("Misc")
 
 --[[local thirdPerson = visualsTab:CreateToggle({
@@ -597,11 +656,14 @@ local silentAim = combatTab:CreateToggle({
     Flag = "Silent Aim",
     Callback = function(Value)
         if Value then
+            silentAimOn = true
             for i, v in pairs(ws:GetChildren()) do
                 if v.Name == "soldier_model" and not v:FindFirstChild("fpv_humanoid") then
                     v.HumanoidRootPart.Size = Vector3.new(silentAimSize / 20, silentAimSize / 20, silentAimSize / 20)
                 end
             end
+        else
+            silentAimOn = false
         end
     end,
 })
@@ -615,63 +677,6 @@ local silentAimSizeSlider = combatTab:CreateSlider({
     Flag = "Silent Aim Size",
     Callback = function(Value)
         silentAimSize = Value
-    end,
-})
-
-local fovEnabled = combatTab:CreateToggle({
-    Name = "Fov Enabled",
-    CurrentValue = false,
-    Flag = "Fov Enabled",
-    Callback = function(Value)
-        if Drawing then
-            if not drawingCreated then
-                while task.wait() do
-                    if Value then
-                        if prevCircle ~= nil then
-                            prevCircle:Remove()
-                        end
-    
-                        prevCircle = Drawing.new("Circle")
-                        prevCircle.Transparency = 1
-                        prevCircle.Visible = true
-                        prevCircle.Thickness = 2
-                        prevCircle.Color = fovColor
-                        prevCircle.NumSides = 20
-                        prevCircle.Radius = silentAimSize
-                        prevCircle.Filled = false
-                        prevCircle.Position = Vector2.new(ws.CurrentCamera.ViewportSize.X / 2, ws.CurrentCamera.ViewportSize.Y / 2)
-                    else
-                        if prevCircle ~= nil then
-                            prevCircle:Remove()
-                        end
-                    end
-                end
-            end
-        else
-            if rayfieldNotificationsEnabled then
-                Rayfield:Notify({
-                    Title = "Not using Synapse",
-                    Content = "You must be using Synapse X.",
-                    Duration = 6.5,
-                    Image = 4483362458,
-                    Actions = {
-                       Accept = {
-                          Name = "Okay!",
-                          Callback = function() return end
-                        },
-                    },
-                })
-            end
-        end
-    end,
-})
-
-local fovColorpicker = combatTab:CreateColorPicker({
-    Name = "FOV Color Picker",
-    Color = Color3.fromRGB(0, 255, 0),
-    Flag = "FOV Color Picker",
-    Callback = function(Value)
-        fovColor = Value
     end,
 })
 
@@ -820,11 +825,6 @@ local toggleNotifications = settingsTab:CreateToggle({
     end,
 })
 
-local credits = settingsTab:CreateParagraph({
-    Title = "Credits",
-    Content = "Scripting: !Bop#8929"
-})
-
 local copyDiscordLink = settingsTab:CreateButton({
     Name = "Copy Discord Link",
     Callback = function()
@@ -848,23 +848,3 @@ local copyDiscordLink = settingsTab:CreateButton({
         end
     end,
 })
-
-local FPS = statsTab:CreateLabel("FPS: "..ws:GetRealPhysicsFPS())
-
-local start = tick()
-game:GetService("ReplicatedStorage").frontlines_assets.r15_rig.RemoteEvent:FireServer()
-local Ping = statsTab:CreateLabel("Ping: "..(math.floor(((tick() - start) + 1) * 1000000)) - 1000000)
-
-local sessionSection = statsTab:CreateSection("Session")
-
-local sessionTimeLabel = statsTab:CreateLabel("Session Time With Sirius: "..math.floor(sessionTime).."s")
-
-while wait(0.1) do
-    FPS:Set("FPS: "..ws:GetRealPhysicsFPS())
-
-    local start = tick()
-    game:GetService("ReplicatedStorage").frontlines_assets.r15_rig.RemoteEvent:FireServer()
-    Ping:Set("Ping: "..(math.floor(((tick() - start) + 1) * 1000000)) - 1000000)
-    sessionTimeLabel:Set("Session Time With Sirius: "..math.floor(sessionTime).."s")
-    sessionTime +=  0.1 -- Synapse says there is an error here, but it is wrong
-end
